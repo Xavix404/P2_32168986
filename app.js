@@ -1,0 +1,17 @@
+const express = require('express')
+const app = express()
+const port = 3000
+
+app.get('/', (req, res) => {
+  res.send('Hello dinosaurio')
+})
+
+app.get('/dinosaurio', (req, res) => {
+    res.send('Hello mandarina')
+  })
+
+app.use(express.static (__dirname + "/public"));
+
+app.listen(port, () => {
+    console.log(`server listening on port: http://localhost:${port}`)
+})
