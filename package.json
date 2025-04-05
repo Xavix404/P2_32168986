@@ -1,6 +1,31 @@
 {
+  "name": "un-gran-paso-para-xavi",
+  "version": "1.0.0",
+  "description": "ProgramacionII",
+  "main": "index.js",
+  "scripts": {
+    "tsc": "tsc",
+    "dev": "ts-node-dev app.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Xavix404/Un-gran-paso-para-xavi.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Xavix404/Un-gran-paso-para-xavi/issues"
+  },
+  "homepage": "https://github.com/Xavix404/Un-gran-paso-para-xavi#readme",
   "dependencies": {
     "ejs": "3.1.10",
     "express": "5.1.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.1",
+    "ts-node-dev": "2.0.0",
+    "typescript": "5.8.3"
   }
 }
