@@ -10,11 +10,6 @@ body{
     font-family: sans-serif;
 }
 
-a{
-    text-decoration: none;
-    color: #4866F0;
-}
-
 header{
     display: flex;
     justify-content: space-between;
@@ -36,17 +31,37 @@ header{
 .logo a{
     padding: 0px 5px;
     transition: all 0.5s;
+    text-decoration: none;
+    color: #4866F0;
 }
 
 nav a{
+    font-size: 18px;
     transition: all 0.5s;
     padding: 5px 5px;
+    text-decoration: none;
+    color: #4866F0;
+    margin: 0px 15px;
+    position: relative;
 }
 
 nav a:hover{
-    background: #282828;
-    color: #97e045;
-    border-radius: 2px;
+    color: #282828;
+}
+
+nav a::before{
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 0%;
+    height: 3px;
+    background-color: #282828;
+    transition: all 0.5s;
+}
+
+nav a:hover::before{
+    width: 100%;
 }
 
 .logo a:hover{
@@ -98,6 +113,18 @@ h1 {
     background: #97e045;
     text-align: center;
     box-shadow: 7px 15px 15px 5px rgba(0, 0, 0, 0.3);
+}
+
+.mandarina{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    margin: auto;
+}
+
+.mandarinaIMG{
+    max-width: 300px;
 }
 
 @media (max-width:700px){
