@@ -1,20 +1,18 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>main</title>
-</head>
+<%- include('template/cabecera.ejs') %>
 <body>
-    <h1><%= title %></h1>
+    <h1><%= text %></h1>
 
-    <div>
-        <ul>
-            <li>Nombre: <%= nombre %></li>
-            <li>Apellido: <%= apellido %></li>
-            <li>CI: <%= ci %></li>
-            <li>Seccion: <%= seccion %></li>
-        </ul>
+    <div class="cuaderno">
+        <div class="nota">
+            <ul>
+                <li class="elemento1">Nombre: <%= nombre %></li>
+                <li class="elemento2">Apellido: <%= apellido %></li>
+                <li class="elemento3">CI: <%= ci %></li>
+                <li class="elemento4">Seccion: <%= seccion %></li>
+            </ul>
+        </div>
+
+        <img src="./images/bookIcon.png" alt="TS">
     </div>
 </body>
 </html>

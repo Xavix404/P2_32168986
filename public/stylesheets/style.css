@@ -1,0 +1,52 @@
+body{
+    background-color: #4866F0;
+    margin: 0;
+    font-family: sans-serif;
+}
+
+ul{
+    margin: auto;
+    padding: 0;
+    list-style: none;
+}
+
+li{
+    padding: 5px;
+    border-bottom: 1px solid #0f1d00;
+}
+
+.elemento4{
+    border-bottom: 0;
+}
+
+h1 {
+    text-align: center;
+    margin: 30px;
+    color: #E06746;
+}
+
+img{
+    padding-top: 25px;
+    max-width: 60%;
+    max-height: 60%;
+}
+
+.nota{
+    border: 2px solid #0f1d00;
+    background: #C4E0A9;
+    padding: 0px;
+    text-align: center;
+}
+
+.cuaderno {
+    box-sizing: border-box;
+    width: 250px;
+    height: 300px;
+    border-left: 10px solid #0f1d00;
+    border-radius: 2px 20px 20px 2px;
+    margin: auto;
+    padding: 25px;
+    background: #97e045;
+    text-align: center;
+    box-shadow: 7px 15px 15px 5px rgba(0, 0, 0, 0.3);
+}
