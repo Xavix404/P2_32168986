@@ -13,8 +13,8 @@ app.get('/', (_req: any, res: any) => {
     res.render('index', {
         title: "DinoApp",
         text: "Hola Mundo",
-        nombre: "Victor",
-        apellido: "Misel",
+        nombres: "Victor Xavier",
+        apellidos: "Misel Marquez",
         ci: 32168986,
         seccion: 4
     })
