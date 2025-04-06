@@ -1,12 +1,12 @@
 import  express  from "express";
-const clear = require('console-clear');
+import clear from 'console-clear';
 const app = express()
 const port = 3000
 clear(true);
 
 //invocando modulos
-var indexRouter = require('./routes/index');
-var dinosaurioRuter = require('./routes/dinosaurio')
+import indexRouter from './routes/index';
+import dinosaurioRuter from './routes/dinosaurio';
 
 //motor de plantillas
 app.set('view engine', 'ejs');
