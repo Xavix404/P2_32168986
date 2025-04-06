@@ -1,31 +1,20 @@
-const express = require('express')
+import  express  from "express";
 const clear = require('console-clear');
 const app = express()
 const port = 3000
 clear(true);
 
+//invocando modulos
+var indexRouter = require('./routes/index');
+var dinosaurioRuter = require('./routes/dinosaurio')
+
 //motor de plantillas
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views');
 
-//router
-app.get('/', (_req: any, res: any) => {
-    res.render('index', {
-        title: "DinoApp",
-        text: "Hola Mundo",
-        nombres: "Victor Xavier",
-        apellidos: "Misel Marquez",
-        ci: 32168986,
-        seccion: 4
-    })
-})
-
-app.get('/dinosaurio', (_req: any, res: any) => {
-    res.render('dinosaurio', {
-        title: "dinosaurio",
-        text: "Hola Mandarina"
-    })
-})
+//rutas
+app.use('/', indexRouter);
+app.use('/', dinosaurioRuter);
 
 //midleware
 app.use(express.static (__dirname + "/public"));

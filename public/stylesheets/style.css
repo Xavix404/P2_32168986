@@ -1,7 +1,56 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
 body{
     background-color: #4866F0;
     margin: 0;
     font-family: sans-serif;
+}
+
+a{
+    text-decoration: none;
+    color: #4866F0;
+}
+
+header{
+    display: flex;
+    justify-content: space-between;
+    background: #89B657;
+    align-items: center;
+    padding: 10px;
+    box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.5);
+}
+
+.logoImg{
+    width: 50px;
+}
+
+.logo{
+    display: flex;
+    align-items: center;
+}
+
+.logo a{
+    padding: 0px 5px;
+    transition: all 0.5s;
+}
+
+nav a{
+    transition: all 0.5s;
+    padding: 5px 5px;
+}
+
+nav a:hover{
+    background: #282828;
+    color: #97e045;
+    border-radius: 2px;
+}
+
+.logo a:hover{
+    color: #282828;
 }
 
 ul{
@@ -10,7 +59,7 @@ ul{
     list-style: none;
 }
 
-li{
+ul li{
     padding: 5px;
     border-bottom: 1px solid #0f1d00;
 }
@@ -25,7 +74,7 @@ h1 {
     color: #E06746;
 }
 
-img{
+.bookLogo{
     padding-top: 25px;
     max-width: 60%;
     max-height: 60%;
@@ -49,4 +98,14 @@ img{
     background: #97e045;
     text-align: center;
     box-shadow: 7px 15px 15px 5px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width:700px){
+    header{
+        flex-direction: column;
+    }
+
+    nav{
+        padding-top: 10px;
+    }
 }
