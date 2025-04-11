@@ -3,8 +3,7 @@ const router = express.Router();
 
 router.get('/dinosaurio', (_req: any, res: any) => {
     res.render('dinosaurio', {
-        title: "dinosaurio",
-        text: "Hola Mandarina"
+        title: "",
     })
 })
 
