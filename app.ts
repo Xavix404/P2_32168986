@@ -4,6 +4,8 @@ const app = express()
 const port = 3000
 clear(true);
 
+//hola
+
 //invocando modulos
 import indexRouter from './routes/index';
 import dinosaurioRuter from './routes/dinosaurio';
