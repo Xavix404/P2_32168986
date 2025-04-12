@@ -1,7 +1,7 @@
 import express from "express";
 const router = express.Router();
 
-router.get('/dinosaurio', (_req: any, res: any) => {
+router.get('/dinosaurio', (_req, res) => {
     res.render('dinosaurio', {
         title: "",
     })

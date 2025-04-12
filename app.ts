@@ -19,7 +19,7 @@ app.use('/', dinosaurioRuter);
 //midleware
 app.use(express.static (__dirname + "/public"));
 
-app.use((_req: any, res: any, _next: any) => {
+app.use((_req, res, _next) => {
     res.status(404).render("404", {title: "404"})
 })
 
