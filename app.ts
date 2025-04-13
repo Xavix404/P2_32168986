@@ -6,7 +6,7 @@ clear(true);
 
 //invocando modulos
 import indexRouter from './routes/index';
-import dinosaurioRuter from './routes/dinosaurio';
+import dinosaurioRouter from './routes/dinosaurio';
 
 //motor de plantillas
 app.set('view engine', 'ejs');
@@ -14,11 +14,12 @@ app.set('views', __dirname + '/views');
 
 //rutas
 app.use('/', indexRouter);
-app.use('/', dinosaurioRuter);
+app.use('/', dinosaurioRouter);
 
 //midleware
 app.use(express.static (__dirname + "/public"));
 
+//error 404
 app.use((_req, res, _next) => {
     res.status(404).render("404", {title: "404"})
 })
