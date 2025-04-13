@@ -24,6 +24,7 @@ app.use((_req, res, _next) => {
     res.status(404).render("404", {title: "404"})
 })
 
+//sever escuchando
 app.listen(port, () => {
     console.log(`server listening on port: http://localhost:${port}`)
 })
