@@ -95,6 +95,10 @@ nav li:first-child{
     transition: all 0.3s;
 }
 
+.sidebar .button{
+    color: #111621;
+}
+
 .sidebar li{
     width: 100%;
 }
