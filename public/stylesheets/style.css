@@ -105,7 +105,7 @@ nav li:first-child{
 
 /*home Page*/
 
-.container{
+.home{
     width: 100%;
     height: 100vh;
     margin: auto;
@@ -117,20 +117,20 @@ nav li:first-child{
     align-items: flex-start;
 }
 
-.container h1{
+.home h1{
     font-size: 45px;
     border-bottom: #111621 solid 5px;
     padding: 5px;
     margin-left: 30px;
 }
 
-.container p{
+.home p{
     font-size: 30px;
     padding: 5px;
     margin-left: 30px;
 }
 
-.container a{
+.home a{
     cursor: pointer;
     text-decoration: none;
     background: #111621;
@@ -139,7 +139,7 @@ nav li:first-child{
     margin-left: 30px;
 }
 
-.container a:hover{
+.home a:hover{
     background: transparent;
     border: #111621 solid 2px;
     color: #111621;
@@ -151,10 +151,6 @@ nav li:first-child{
     margin: auto;
     width: 100%;
     min-height: 100vh;
-    display: flex;
-    gap: 20px;
-    flex-direction: column;
-    align-items: center;
 }
 
 .gridAbout{
@@ -245,8 +241,138 @@ nav li:first-child{
 
 /*Testimonals*/
 
+.testimonials{
+    margin: auto;
+    width: 100%;
+    min-height: 100vh;
+}
 
+.gridTestimonials{
+    width: 100%;
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: start;
+}
 
+.testimonialsImage{
+    width: 100%;
+    height: 100%;
+    background: url(../images/img2.jpg) no-repeat center center/cover;
+}
+
+.testimonialsContent{
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #002132;
+}
+
+.testimonials p{
+    font-size: 19px;
+    color: #f3f3f3;
+}
+
+.testimonials h2{
+    font-size: 48px;
+    color: #f3f3f3;
+    border-bottom: #f3f3f3 solid 3px;
+    margin-bottom: 30px;
+}
+
+.testimonialAutor{
+    margin: 10px 0;
+    border-bottom: #f3f3f3 solid 2px;
+    color: #f3f3f3;
+    font-weight: bold;
+}
+
+/*Contacto*/
+
+.contact{
+    background: #e8fffc;
+    scroll-margin-top: 3rem;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.contact h2{
+    margin: 3.5rem 0;
+    border-bottom: #111621 solid 3px;
+}
+
+.gridContact{
+    width: 100%;
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
+}
+
+.contact p{
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.contact strong{
+    color: #002132;
+}
+
+.contact a{
+    text-decoration: none;
+    color: #002132;
+}
+
+.contact a:hover{
+    text-decoration: underline;
+}
+
+.direction{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 2rem 0;
+}
+
+.link{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.8rem 0;
+}
+
+.contactForm{
+    width: 100%;
+}
+
+.contactForm form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.contactForm form .campo{
+    width: 80%;
+    padding: 0.75rem 1.10rem;
+    border: #002132 solid 1px;
+    margin-bottom: 1.3rem;
+    border-radius: 3px;
+    outline: 0;
+}
+
+.contactForm form .campo:focus{
+    border: #000000 solid 1px;
+    box-shadow: 0 1px 1px #002132;
+}
+
+.contact textarea{
+    resize: none;
+    min-height: 140px;
+}
 
 /*mediaQuerys*/
 
@@ -268,17 +394,27 @@ nav li:first-child{
 @media (max-width: 650px){
     .gridAbout{
         grid-template-columns: 1fr;
+        grid-template-rows: repeat(2,1fr);
     }
     .servicesGrid{
         grid-template-columns: 1fr;
+        grid-template-rows: repeat(2,1fr);
+    }
+    .gridTestimonials{
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(2,1fr);
+    }
+    .gridContact{
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(2,1fr);
     }
 }
 
 @media (max-width: 550px){
-    .container{
+    .home{
         align-items: center;
     }
-    .container a, .container p, .container h1{
+    .home a, .home p, .home h1{
         margin-left: 0;
     }
 }
