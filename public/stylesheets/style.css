@@ -169,7 +169,6 @@ nav li:first-child{
     display: grid;
     height: 100dvh;
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(3, 1fr);
     justify-items: center;
 }
 
@@ -524,6 +523,10 @@ nav li:first-child{
         grid-template-rows: repeat(2,1fr);
     }
     .gridContact{
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(2,1fr);
+    }
+    .gridAAB{
         grid-template-columns: 1fr;
         grid-template-rows: repeat(2,1fr);
     }
