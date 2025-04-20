@@ -26,19 +26,14 @@ header{
     top: 0;
 }
 
-.navigation{
-    width: 100%;
+nav{
     background: #002132;
     box-shadow: 0px 0px 15px 0px #111621;
-    display: flex;
 }
 
 nav ul{
-    width: 100%;
     list-style: none;
     display: flex;
-    justify-content: flex-end;
-    align-items: center;
 }
 
 nav li{
@@ -60,7 +55,7 @@ nav .button{
 }
 
 nav .button:hover{
-    background: #11162130;
+    background: #11162177;
 }
 
 nav a:focus-visible{
@@ -83,34 +78,24 @@ nav li:first-child{
     font-weight: bold;
 }
 
-.sidebar{
-    position: absolute;
-    top: 0;
-    right: 0;
-    height: 100dvh;
-    width: 250px;
-    z-index: 9;
-    background: #00213240;
-    backdrop-filter: blur(10px);
-    box-shadow: -10px 0 10px #00000030;
-    right: -30em;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    transition: all 0.3s;
-    transition: right 0.5s ease-in-out;
-}
-
-.sidebar.show{
-    right: 0;
-}
-
-.sidebar li{
-    width: 100%;
-}
-
-.menuButton{
+#openButton{
     display: none;
+    position: sticky;
+    top: 0;
+    background: #002132;
+    border: none;
+    margin-left: auto;
+    border-radius: 4px;
+    padding: 1em;
+    cursor: pointer;
+}
+
+#closenavBar{
+    display: none;
+    background: none;
+    border: none;
+    padding: 1em;
+    cursor: pointer;
 }
 
 /*home Page*/
@@ -215,7 +200,7 @@ nav li:first-child{
 
 .gridAbout{
     width: 100%;
-    min-height: 100%;
+    min-height: 100dvh;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     justify-items: start;
@@ -500,12 +485,38 @@ nav li:first-child{
     }
 }
 
-@media (max-width: 750px) {
-    .hideOnMobile{
-        display: none;
-    }
-    .menuButton{
+@media (max-width: 700px) {
+    #openButton, #closenavBar{
         display: block;
+    }
+    header{
+        position: fixed;
+        top: 0;
+        right: 0;
+    }
+    nav{
+        position: fixed;
+        top: 0;
+        right: -100%;
+        height: 100vh;
+        width: min(15em, 100%);
+        z-index: 10;
+        transition: all 0.3s;
+        transition: right 0.5s ease-out;
+    }
+    nav.show{
+        right: 0;
+    }
+    nav ul{
+        width: 100%;
+        flex-direction: column;
+    }
+    nav a{
+        width: 100%;
+        padding-left: 2.5em;
+    }
+    nav li:first-child{
+        display: none;
     }
 }
 
@@ -538,10 +549,5 @@ nav li:first-child{
     }
     .home a, .home p, .home h1{
         margin-left: 0;
-    }
-}
-@media (max-width: 400px){
-    .sidebar{
-        width: 100%;
     }
 }
