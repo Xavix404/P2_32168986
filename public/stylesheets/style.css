@@ -51,7 +51,7 @@ nav .button{
     cursor: pointer;
     width: 100%;
     height: 100%;
-    padding: 0 min(2.5em, 30px);
+    padding: 0 2em;
     text-decoration: none;
     display: flex;
     align-items: center;
@@ -74,12 +74,12 @@ nav li:first-child{
 
 .logo{
     height: 50%;
-    padding: 0px 30px;
+    padding: 0 2em;
     text-decoration: none;
     display: flex;
     align-items: center;
     color: #f3f3f3;
-    font-size: 20px;
+    font-size: 1.3rem;
     font-weight: bold;
 }
 
@@ -87,7 +87,7 @@ nav li:first-child{
     position: absolute;
     top: 0;
     right: 0;
-    height: 100vh;
+    height: 100dvh;
     width: 250px;
     z-index: 9;
     background: #00213240;
@@ -117,7 +117,7 @@ nav li:first-child{
 
 .home{
     width: 100%;
-    height: 100vh;
+    height: 100dvh;
     margin: auto;
     background: url(../images/img5.jpg) no-repeat center center/cover;
     display: flex;
@@ -127,16 +127,16 @@ nav li:first-child{
 }
 
 .home h1{
-    font-size: 45px;
+    font-size: clamp(2rem, calc(7vw + 1rem), 3.3rem);
     border-bottom: #111621 solid 5px;
-    padding: 5px;
-    margin-left: 30px;
+    padding: 0.2em;
+    margin-left: 2rem;
 }
 
 .home p{
-    font-size: 30px;
-    padding: 5px;
-    margin-left: 30px;
+    font-size: clamp(1rem, calc(3vw + 1rem), 2rem);
+    padding: 0.2em;
+    margin-left: 2rem;
 }
 
 .home a{
@@ -144,8 +144,10 @@ nav li:first-child{
     text-decoration: none;
     background: #111621;
     color: #e8fffc;
-    padding: 10px;
-    margin-left: 30px;
+    padding: 1rem;
+    margin-top: 1rem;
+    border-radius: 4px;
+    margin-left: 2rem;
 }
 
 .home a:hover{
@@ -156,17 +158,65 @@ nav li:first-child{
 
 /*Ventajas y Beneficios*/
 
+.advantagesAndBenefits{
+    width: 100%;
+    min-height: 100dvh;
+    background: #e8fffc;
+    color: #111621;
+}
+
+.gridAAB{
+    display: grid;
+    height: 100dvh;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    justify-items: center;
+}
+
+.containerAAB {
+    min-height: 100dvh;
+    padding: max(2rem, 10%);
+    background-color: #e8fffc;
+}
+
+.AABimage{
+    width: 100%;
+    height: 100dvh;
+    background: url(../images/img3.jpg) no-repeat center center/cover;
+}
+
+.containerAAB h2 {
+    text-align: center;
+    padding: 0.7rem;
+    color: #002132;
+    margin-bottom: 30px;
+}
+
+.containerAAB ol {
+    font-size: 1.5rem;
+    height: 100%;
+    list-style: none;
+    padding: 0;
+    color: #002132;
+}
+
+.containerAAB li {
+    margin: 10px 0;
+    padding: 10px;
+}
+
+
 /*Sobre*/
 
 .about{
     margin: auto;
     width: 100%;
-    min-height: 100vh;
+    height: 100dvh;
 }
 
 .gridAbout{
     width: 100%;
-    min-height: 100vh;
+    min-height: 100%;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     justify-items: start;
@@ -179,7 +229,7 @@ nav li:first-child{
 }
 
 .aboutContent{
-    padding: 30px;
+    padding: max(2rem, 10%);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -188,12 +238,12 @@ nav li:first-child{
 }
 
 .about p{
-    font-size: 19px;
+    font-size: 1.3rem;
     color: #f3f3f3;
 }
 
 .about h2{
-    font-size: 48px;
+    font-size: clamp(2rem, calc(7vw + 1rem), 3rem);
     color: #f3f3f3;
     border-bottom: #f3f3f3 solid 3px;
     margin-bottom: 30px;
@@ -203,15 +253,14 @@ nav li:first-child{
 
 .services{
     scroll-margin-top: 3rem;
-    min-height: 100vh;
-    padding: 20px;
+    min-height: 100dvh;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
 .services h2{
-    margin: 20px 0;
+    margin: 3rem 0;
     border-bottom: #111621 solid 3px;
 }
 
@@ -220,7 +269,7 @@ nav li:first-child{
     width: 100%;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    gap: 1.5rem;
     justify-items: center;
 }
 
@@ -234,8 +283,9 @@ nav li:first-child{
 }
 
 .services img {
-    width: 100%;
-    height: 200px;
+    max-width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
     object-fit: cover;
 }
 
@@ -246,7 +296,7 @@ nav li:first-child{
 
 .services p {
     padding: 15px;
-    font-size: 14px;
+    font-size: 1rem;
     color: #f3f3f3;
 }
 
@@ -255,12 +305,12 @@ nav li:first-child{
 .testimonials{
     margin: auto;
     width: 100%;
-    min-height: 100vh;
+    min-height: 100dvh;
 }
 
 .gridTestimonials{
     width: 100%;
-    min-height: 100vh;
+    min-height: 100dvh;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     justify-items: start;
@@ -282,12 +332,12 @@ nav li:first-child{
 }
 
 .testimonials p{
-    font-size: 19px;
+    font-size: 1.3rem;
     color: #f3f3f3;
 }
 
 .testimonials h2{
-    font-size: 48px;
+    font-size: clamp(2rem, calc(7vw + 1rem), 3rem);
     color: #f3f3f3;
     border-bottom: #f3f3f3 solid 3px;
     margin-bottom: 30px;
@@ -305,7 +355,7 @@ nav li:first-child{
 .contact{
     background: #e8fffc;
     scroll-margin-top: 3rem;
-    min-height: 100vh;
+    min-height: 100dvh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -318,7 +368,6 @@ nav li:first-child{
 
 .gridContact{
     width: 100%;
-    min-height: 100vh;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     justify-items: center;
