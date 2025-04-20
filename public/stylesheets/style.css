@@ -11,7 +11,6 @@ body{
     color: #111621;
     font-family: Arial, Helvetica, sans-serif;
     overflow-x: hidden;
-    position: relative;
 }
 
 /*Navegacion*/
@@ -109,7 +108,6 @@ nav li:first-child{
     width: 100%;
     height: 100vh;
     margin: auto;
-    margin-bottom: 50px;
     background: url(../images/img5.jpg) no-repeat center center/cover;
     display: flex;
     flex-direction: column;
@@ -356,22 +354,81 @@ nav li:first-child{
 }
 
 .contactForm form .campo{
+    font-size: 1rem;
     width: 80%;
     padding: 0.75rem 1.10rem;
     border: #002132 solid 1px;
     margin-bottom: 1.3rem;
     border-radius: 3px;
-    outline: 0;
-}
-
-.contactForm form .campo:focus{
-    border: #000000 solid 1px;
-    box-shadow: 0 1px 1px #002132;
+    outline: none;
 }
 
 .contact textarea{
+    font-family: inherit;
     resize: none;
-    min-height: 140px;
+    min-height: 8.8rem;
+}
+
+.contact button{
+    padding: 1rem;
+    margin-bottom: 1.3rem;
+    font-size: 1rem;
+    border: none;
+    outline: none;
+    background: #002132;
+    color: #f3f3f3;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.contact button:hover{
+    background: #002132EE
+}
+
+/*footer*/
+
+.footer{
+    position: relative;
+    width: 100%;
+    min-height: 8.8rem;
+    background: #002132;
+    padding: 1.3rem 3.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer ul{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0.7rem 0.3rem;
+    flex-wrap: wrap;
+}
+
+.footer li{
+    list-style: none;
+}
+
+.footer a{
+    color: #f3f3f3;
+    font-size: 2rem;
+    display: inline-block;
+    margin: 0 0.7rem;
+    transition: all 0.3s;
+}
+
+.footer a:hover{
+    transform: translateY(-0.7rem);
+}
+
+.footer p{
+    color: #f3f3f3;
+    text-align: center;
+    margin: 1rem 0;
+    font-size: 1.3rem;
 }
 
 /*mediaQuerys*/
