@@ -167,7 +167,7 @@ nav li:first-child{
 
 .gridAAB{
     display: grid;
-    height: 100dvh;
+    min-height: 100dvh;
     grid-template-columns: repeat(2, 1fr);
     justify-items: center;
 }
@@ -210,7 +210,7 @@ nav li:first-child{
 .about{
     margin: auto;
     width: 100%;
-    height: 100dvh;
+    min-height: 100dvh;
 }
 
 .gridAbout{
