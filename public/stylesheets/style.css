@@ -249,12 +249,13 @@ nav li:first-child{
 }
 
 .servicesGrid{
-    margin: auto;
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    grid-template-rows: auto;
     gap: 1.5rem;
     justify-items: center;
+    margin-bottom: 30px;
 }
 
 .services article {
@@ -263,6 +264,7 @@ nav li:first-child{
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     width: 300px;
+    height: 400px;
     text-align: center;
 }
 
@@ -478,12 +480,6 @@ nav li:first-child{
 }
 
 /*mediaQuerys*/
-
-@media (max-width: 1000px){
-    .servicesGrid{
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
 
 @media (max-width: 700px) {
     #openButton, #closenavBar{
