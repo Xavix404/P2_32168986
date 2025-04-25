@@ -252,7 +252,6 @@ nav li:first-child{
     width: 100%;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    grid-template-rows: auto;
     gap: 1.5rem;
     justify-items: center;
     margin-bottom: 30px;

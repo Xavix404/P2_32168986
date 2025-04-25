@@ -6,7 +6,10 @@ clear(true);
 
 //invocando modulos
 import indexRouter from './routes/index';
-import dinosaurioRouter from './routes/dinosaurio';
+import aboutRouter from './routes/about';
+import servicesRouter from './routes/services';
+import testimonialsRouter from './routes/testimonials';
+import contactRouter from './routes/contact';
 
 //motor de plantillas
 app.set('view engine', 'ejs');
@@ -14,7 +17,10 @@ app.set('views', __dirname + '/views');
 
 //rutas
 app.use('/', indexRouter);
-app.use('/', dinosaurioRouter);
+app.use('/', aboutRouter);
+app.use('/', servicesRouter);
+app.use('/', testimonialsRouter);
+app.use('/', contactRouter);
 
 //midleware
 app.use(express.static (__dirname + "/public"));
