@@ -1,5 +1,6 @@
 const navBar = document.getElementById('navBar');
 const openButton = document.getElementById('openButton')
+const navLinks = document.querySelectorAll('nav a')
 
 const media = window.matchMedia("(width < 700px)")
 
@@ -10,6 +11,11 @@ function updateNavbar(e){
     console.log(isMobile)
     if(isMobile){
         navBar.setAttribute('inert', '')
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                hidenavBar()
+            })
+        });
     }
     else{
         navBar.removeAttribute('inert')
