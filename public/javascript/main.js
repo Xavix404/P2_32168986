@@ -19,6 +19,11 @@ function updateNavbar(e){
     }
     else{
         navBar.removeAttribute('inert')
+        navLinks.forEach(link => {
+            link.removeEventListener('click', () => {
+                hidenavBar()
+            })
+        });
     }
 }
 
@@ -34,4 +39,4 @@ function hidenavBar(){
     openButton.setAttribute('aria-expanded', 'false')
 }
 
-updateNavbar()
+updateNavbar(media)
