@@ -1,3 +1,5 @@
+//NavBar
+
 const navBar = document.getElementById('navBar');
 const openButton = document.getElementById('openButton')
 const navLinks = document.querySelectorAll('nav a')

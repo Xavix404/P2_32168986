@@ -1,10 +1,9 @@
 import express from 'express';
+import { contactControler } from '../controlers/indexControler';
 const router = express.Router();
 
-router.get('/', (_req, res) => {
-    res.render('index', {
-        title: "RefriExpert",
-    })
-})
+router.get('/', contactControler.getALL);
+
+router.post('/send', contactControler.addContact);
 
 export default router;

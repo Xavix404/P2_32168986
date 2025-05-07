@@ -20,13 +20,17 @@
   },
   "homepage": "https://github.com/Xavix404/Un-gran-paso-para-xavi#readme",
   "dependencies": {
-    "ejs": "3.1.10"
+    "body-parser": "2.2.0",
+    "ejs": "3.1.10",
+    "express": "5.1.0",
+    "sqlite": "5.1.1",
+    "sqlite3": "5.1.7"
   },
   "devDependencies": {
+    "@types/better-sqlite3": "7.6.13",
     "@types/console-clear": "1.1.4",
     "@types/express": "5.0.1",
     "console-clear": "1.1.1",
-    "express": "5.1.0",
     "ts-node-dev": "2.0.0",
     "typescript": "5.8.3"
   }
