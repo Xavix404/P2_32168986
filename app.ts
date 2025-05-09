@@ -1,7 +1,6 @@
 import  express  from 'express';
 import clear from 'console-clear';
 import bodyParser from 'body-parser';
-import path from 'path';
 
 const app = express()
 const PORT = process.env.PORT || 8080;
@@ -14,6 +13,9 @@ app.disable('x-powered-by');
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded())
 
+//middleware para archivos estaticos
+app.use(express.static (__dirname + "/public"));
+
 //motor de plantillas
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views');
@@ -25,8 +27,6 @@ import indexRouter from './routes/index';
 
 //rutas
 app.use('/', indexRouter);
-
-app.use(express.static (__dirname + "/public"));
 
 //error 404
 app.use((_req, res) => {
