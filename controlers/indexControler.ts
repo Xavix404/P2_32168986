@@ -4,9 +4,9 @@ import { ContactsModel } from "../models/contactsModel";
 
 export class contactControler {
     static validateData = [
-        check('name').notEmpty().withMessage('El nombre es obligatorio'),
+        check('name').matches(/^[a-zA-ZÀ-ÿ\s]{1,40}$/).withMessage('El nombre es invalido'),
         check('email').isEmail().withMessage('El email es obligatorio'),
-        check('phone').matches(/^(0?424-?\d{7}|424-?\d{7})$/).withMessage('El numero telefono no es valido'),
+        check('phone').matches(/^0?4(12|24|14|16|26)-?\d{7}$/).withMessage('El numero telefono no es valido'),
         check('message').notEmpty().withMessage('El mensaje es obligatorio')
     ]
 
