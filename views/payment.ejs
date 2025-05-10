@@ -1,0 +1,63 @@
+<%- include('template/cabecera.ejs') %>
+
+<main>
+    <div class="wrapper">
+        <div class="payment">
+            <h2>Pago</h2>
+            <form class="form" action="/paymentSuccess" method="POST">
+                <div class="card space iconRelative">
+                    <label for="email">Correo Electronico</label>
+                    <input type="email" id="email" class="input" name="email" placeholder="example@gmail.com" required>
+                    <ion-icon name="mail-outline"></ion-icon>
+                </div>
+                <div class="card space iconRelative">
+                    <label for="card_holder">Nombre del titular</label>
+                    <input type="text" id="card_holder" class="input" name="card_holder" placeholder="Fidel Castro" required>
+                    <ion-icon name="person-circle-outline"></ion-icon>
+                </div>
+                <div class="card space iconRelative">
+                    <label for="card_number">Numero de tarjeta</label>
+                    <input type="text" id="card_number" class="input" name="card_number" placeholder="card number" required data-mask="0000 0000 0000 0000">
+                    <ion-icon name="card-outline"></ion-icon>
+                </div>
+                <div class="card_grp space">
+                    <div class="cardItem iconRelative">
+                        <label for="expiration_month">Mes</label>
+                        <input type="text" id="expiration_month" class="input" name="expiration_date" placeholder="MM" required data-mask="00">
+                        <ion-icon name="calendar-outline"></ion-icon>
+                    </div>
+                    <div class="cardItem iconRelative">
+                        <label for="expiration_year">Año</label>
+                        <input type="text" id="expiration_year" class="input" name="expiration_date" placeholder="AA" required data-mask="00">
+                        <ion-icon name="calendar-outline"></ion-icon>
+                    </div>
+                </div>
+                <div class="cardItem iconRelative">
+                    <label for="CVC">CVC</label>
+                    <input type="text" id="CVC" class="input" name="CVC" placeholder="000" required data-mask="000">
+                    <ion-icon name="key-outline"></ion-icon>
+                </div>
+                <div class="card_grp space">
+                    <div class="card space iconRelative">
+                        <label for="amount">Monto</label>
+                        <input type="text" id="amount" class="input cardItem" name="amount" placeholder="$ 0.00" required data-mask="$ 000.00">
+                        <ion-icon name="cash-outline"></ion-icon>
+                    </div>
+                    <div class="card space iconRelative">
+                        <label for="currency">Moneda</label>
+                        <select class="input" id="currency" name="currency" required>
+                            <option value="USD">USD</option>
+                            <option value="EUR">EUR</option>
+                            <option value="VBS">VBS</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn">Pagar</button>
+            </form>
+
+        </div>
+    </div>
+</main>
+
+<%- include('template/footer.ejs') %>

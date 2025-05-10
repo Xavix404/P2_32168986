@@ -25,7 +25,7 @@
   "include": [
     "*.ts",
     "**/**/*.ts",
-    "**/**/**/*.ts", "app.ts", "routes/index.ts",
+    "**/**/**/*.ts", "app.ts", "routes/router.ts",
   ],
   "exclude": [
     "node_modules",

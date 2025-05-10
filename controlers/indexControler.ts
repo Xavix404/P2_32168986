@@ -17,10 +17,36 @@ export class contactControler {
 
         await ContactsModel.saveContact(saveData)
         
-            res.status(200).send('Contacto guardado correctamente');
+            res.render('success', {
+                title: "RefriExpert-Success",
+            });
         } catch (error) {
             res.status(500).send('Error al guardar el contacto');
             console.error('Error al guardar el contacto:', error);
         }
+    }
+
+    // Obtener todos los contactos
+
+    static async getContacts(req: Request, res: Response) {
+        try {
+            const contacts = await ContactsModel.getContacts();
+            res.render('admin', {contacts : contacts ,title: "RefriExpert-Admin"});
+        } catch (error) {
+            res.status(500).send('Error al obtener los contactos');
+            console.error('Error al obtener los contactos:', error);
+        }
+    }
+
+    static async paymentSuccess(req: Request, res: Response) {
+        res.render('paymentSuccess', {
+            title: "RefriExpert-Payment",
+        })
+    }
+
+    static async getPayment(req: Request, res: Response) {
+        res.render('payment', {
+            title: "RefriExpert-Payment",
+        })
     }
 }

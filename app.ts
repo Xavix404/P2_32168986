@@ -3,7 +3,7 @@ import clear from 'console-clear';
 import bodyParser from 'body-parser';
 
 const app = express()
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 3000;
 clear(true);
 
 //desactivar el header x-powered-by
@@ -21,12 +21,11 @@ app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views');
 
 //invocando modulos
-import indexRouter from './routes/index';
+import router from './routes/router';
 
-
-
-//rutas
-app.use('/', indexRouter);
+//router
+app.use('/', router);
+app.use('/admin', router);
 
 //error 404
 app.use((_req, res) => {

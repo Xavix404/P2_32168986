@@ -1,0 +1,43 @@
+<%- include('template/cabecera.ejs') %>
+    <main>
+        <div class="adminPanel">
+            <h1 class="adminTitle">Admin Panel</h1>
+            <table class="adminTable">
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Message</th>
+                    <th>Ip</th>
+                    <th>Date</th>
+                
+                    <% contacts.forEach(element => { %>
+                    <tr>
+                        <td>
+                            <p><%= element.ID %></p>
+                        </td>
+                        <td>
+                            <p><%= element.name %></p>
+                        </td>
+                        <td>
+                            <p><%= element.email %></p>
+                        </td>
+                        <td>
+                            <p><%= element.phone %></p>
+                        </td>
+                        <td>
+                            <p><%= element.message %></p>
+                        </td>
+                        <td>
+                            <p><%= element.ip %></p>
+                        </td>
+                        <td>
+                            <p><%= element.date %></p>
+                        </td>
+                    </tr>
+                    <% }) %>
+                
+            </table>
+        </div>
+    </main>
+<%- include('template/footer.ejs') %>

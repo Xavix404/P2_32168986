@@ -4,7 +4,7 @@ import { open } from 'sqlite'
 export class ContactsModel {
     private static async databaseConnection() {
         return open({
-            filename: './service-database.db',
+            filename: './dataBase/service-database.db',
             driver: sqlite3.Database
         })
     }
@@ -18,6 +18,13 @@ export class ContactsModel {
             'INSERT INTO contacts (email, name, phone, message, ip, date) VALUES (?, ?, ?, ?, ?, ?)',
             contact.email, contact.name, contact.phone, contact.message, contact.ip, contact.date
         )
+        await db.close()
+    }
+
+    static async getContacts() {
+        const db = await this.databaseConnection();
+        const contacts = await db.all('SELECT ID, email, name, phone, message, ip, date FROM contacts')
+        return contacts;
         await db.close()
     }
 }
