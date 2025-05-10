@@ -32,7 +32,7 @@ export class contactControler {
             
             const { name, email, phone, message } = req.body;
             const ip = (req.ip || 'unknown').replace('::ffff:', '');
-            const date = new Date().toISOString().split('T')[0];
+            const date = new Date().toISOString().replace('T', ' ').substring(0, 19);
             const saveData = { email, name, phone, message, ip, date };
 
             await ContactsModel.saveContact(saveData)
