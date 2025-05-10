@@ -408,7 +408,7 @@ nav li:first-child{
     width: 80%;
     padding: 0.75rem 1.10rem;
     border: #002132 solid 1px;
-    margin-bottom: 1.3rem;
+    margin-top: 1.3rem;
     border-radius: 3px;
     outline: none;
 }
@@ -421,7 +421,7 @@ nav li:first-child{
 
 .contact button{
     padding: 1rem;
-    margin-bottom: 1.3rem;
+    margin: 1.3rem 0;
     font-size: 1rem;
     border: none;
     outline: none;
@@ -435,6 +435,27 @@ nav li:first-child{
 .contact button:hover{
     background: #002132EE
 }
+
+.contactForm form .formulario__grupo-incorrecto{
+    border: #FE2D48 solid 2px;
+}
+
+.contactForm form .formulario__grupo-correcto{
+    border: #02971F solid 2px;
+}
+
+.formulario__input-error {
+    color: #FE2D48;
+    max-width: 80%;
+	font-size: 1rem;
+	margin-bottom: 0;
+	display: none;
+}
+
+.formulario__input-error-activo {
+	display: inline;
+}
+
 
 /*footer*/
 

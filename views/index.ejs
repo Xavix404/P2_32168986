@@ -114,14 +114,19 @@
                 </div>
 
                 <div class="contactForm">
-                    <form action="/send" method="post">
-                        <input required class="campo" type="text" id="name" name="name" placeholder="Nombre">
+                    <form id="form" action="/send" method="post">
+                        
+                        <input class="campo" type="text" id="name" name="name" placeholder="Nombre">
+                        <p id="error_name" class="formulario__input-error">El nombre no debe tener caracteres espaciales o numeros.</p>
 
-                        <input required class="campo" type="email" id="email" name="email" placeholder="Correo">
+                        <input class="campo" type="email" id="email" name="email" placeholder="Correo">
+                        <p id="error_email" class="formulario__input-error">El correo solo puede contener letras, numeros, puntos, guiones y guion bajo.</p>
 
-                        <input required class="campo" type="tel" id="phone" name="phone" placeholder="Teléfono">
+                        <input class="campo" type="tel" id="phone" name="phone" placeholder="Teléfono">
+                        <p id="error_phone" class="formulario__input-error">El telefono solo puede contener numeros y el maximo son 14 dígitos.</p>
 
                         <textarea class="campo" name="message" id="message" placeholder="Mensaje"></textarea>
+                        <p id="error_message" class="formulario__input-error">El mensaje debe contener de 1 a 400 caracteres</p>
 
                         <button type="submit">Enviar</button>
                     </form>
