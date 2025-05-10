@@ -436,13 +436,7 @@ nav li:first-child{
     background: #002132EE
 }
 
-.contactForm form .formulario__grupo-incorrecto{
-    border: #FE2D48 solid 2px;
-}
 
-.contactForm form .formulario__grupo-correcto{
-    border: #02971F solid 2px;
-}
 
 .formulario__input-error {
     color: #FE2D48;
