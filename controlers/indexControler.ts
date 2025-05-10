@@ -11,8 +11,8 @@ export class contactControler {
     static async add(req: Request, res: Response) {
         try {
         const { name, email, phone, message } = req.body;
-        const ip = req.ip || 'unknown';
-        const date = new Date().toISOString();
+        const ip = (req.ip || 'unknown').replace('::ffff:', '');
+        const date = new Date().toISOString().split('T')[0];
         const saveData = { email, name, phone, message, ip, date };
 
         await ContactsModel.saveContact(saveData)

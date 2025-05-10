@@ -133,6 +133,4 @@ formulario.addEventListener('submit', (e) => {
     } else {
         e.defaultPrevented = false;
     }
-
-	
 });
