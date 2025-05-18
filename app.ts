@@ -1,38 +1,53 @@
-import  express  from 'express';
+import express from 'express';
 import clear from 'console-clear';
 import bodyParser from 'body-parser';
+import { ContactsModel } from './models/contactsModel';
+import router from './routes/router';
 
-const app = express()
+const app = express();
 const PORT = process.env.PORT || 3000;
 clear(true);
 
-//desactivar el header x-powered-by
+// Deshabilita el header 'x-powered-by' por seguridad
 app.disable('x-powered-by');
 
-//body parser middleware
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded())
+// Middleware para parsear JSON en las peticiones
+app.use(bodyParser.json());
+// Middleware para parsear datos de formularios (urlencoded)
+app.use(bodyParser.urlencoded({ extended: true }));
 
-//middleware para archivos estaticos
-app.use(express.static (__dirname + "/public"));
+// Sirve archivos estáticos desde la carpeta 'public'
+app.use(express.static(__dirname + "/public"));
 
-//motor de plantillas
+// Configura EJS como motor de plantillas
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views');
 
-//invocando modulos
-import router from './routes/router';
-
-//router
+// Usa el router principal
 app.use('/', router);
-app.use('/admin', router);
 
-//error 404
+// Middleware para manejar rutas no encontradas (404)
 app.use((_req, res) => {
-    res.status(404).render("404", {title: "404"})
-})
+    res.status(404).render("404", { title: "404" });
+});
 
-//sever escuchando
-app.listen(PORT, () => {
-    console.log(`server listening on port: http://localhost:${PORT}`)
-})
+// Middleware global de manejo de errores
+app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
+    console.error(err.stack);
+    res.status(500).render('500', { title: 'Error del servidor' });
+});
+
+// Función principal para iniciar el servidor y la base de datos
+async function startServer() {
+    // Inicializa la base de datos y crea la tabla si no existe
+    await ContactsModel.initDb();
+    await ContactsModel.createTable();
+
+    // Inicia el servidor en el puerto especificado
+    app.listen(PORT, () => {
+        console.log(`server listening on port: http://localhost:${PORT}`);
+    });
+}
+
+// Inicia la aplicación
+startServer();

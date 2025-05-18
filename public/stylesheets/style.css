@@ -523,6 +523,7 @@ table, th, td {
 }
 
 .adminTable{
+    max-width: 80%;
     margin: 2rem 0;
     overflow: hidden;
 }
