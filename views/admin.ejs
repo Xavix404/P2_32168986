@@ -39,11 +39,10 @@
                 
             </table>
 
-            <div class="adminButtons">
-                <button class="adminButton" id="deleteAll" onclick="deleteAll()">
-                    Delete All
-                </button>
-            </div>
+        <form action="/admin/clear" method="post" onsubmit="return confirm('¿Estás seguro de que deseas borrar todos los contactos?');">
+            <button type="submit" class="btn-danger">Limpiar base de datos</button>
+        </form>
+
         </div>
     </main>
 <%- include('template/footer.ejs') %>

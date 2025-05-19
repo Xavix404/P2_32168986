@@ -63,4 +63,10 @@ export class ContactsModel {
             throw error;
         }
     }
+
+    // Elimina todos los contactos
+    static async clearAll() {
+        if (!this.db) throw new Error('Database not initialized');
+        await this.db.run('DELETE FROM contacts');
+    }
 }

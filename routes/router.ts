@@ -5,6 +5,7 @@ const router = express.Router();
 router.get('/', contactControler.getALL);
 router.post('/send', contactControler.validateData, contactControler.add);
 router.get('/admin', contactControler.getContacts);
+router.post('/admin/clear', contactControler.clearContacts);
 router.get('/payment', contactControler.getPayment);
 router.post('/paymentSuccess', contactControler.paymentSuccess);
 

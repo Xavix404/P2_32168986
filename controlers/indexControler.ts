@@ -81,4 +81,14 @@ export class contactControler {
             title: "RefriExpert-Payment",
         });
     }
+
+    static async clearContacts(req: Request, res: Response) {
+        try {
+            await ContactsModel.clearAll();
+            res.redirect('/admin'); // O renderiza un mensaje de éxito
+        } catch (error) {
+            console.error('Error al limpiar la base de datos:', error);
+            res.status(500).render('500', { title: 'Error del servidor' });
+        }
+    }
 }
