@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { check, validationResult } from "express-validator";
 import { ContactsModel, Contact } from "../models/contactsModel";
+import fetch from 'node-fetch';
 
 export class contactControler {
     // Validaciones para los campos del formulario
@@ -47,7 +48,21 @@ export class contactControler {
             const now = new Date();
             const date = now.toISOString().replace('T', ' ').substring(0, 19); // YYYY-MM-DD HH:mm:ss
 
-            const saveData: Contact = { email, name, phone, message, ip, date };
+            // Consulta el API de geolocalización
+            let country = 'Desconocido';
+            let city = 'Desconocido';
+            try {
+                const response = await fetch(`https://ipapi.co/${ip}/json/`);
+                if (response.ok) {
+                    const geo = await response.json() as { country_name?: string; city?: string };
+                    country = geo.country_name || country;
+                    city = geo.city || city;
+                }
+            } catch (geoError) {
+                console.error('Error obteniendo geolocalización:', geoError);
+            }
+
+            const saveData: Contact = { email, name, phone, message, ip, date, country, city };
             await ContactsModel.saveContact(saveData);
 
             res.render('success', {
@@ -55,7 +70,7 @@ export class contactControler {
             });
         } catch (error) {
             console.error('Error al guardar el contacto:', error);
-            res.status(500).render('500', { title: 'Error del servidor' });
+            res.status(500).render('success', { title: 'Error del servidor' });
         }
     }
 

@@ -5,7 +5,7 @@ import { ContactsModel } from './models/contactsModel';
 import router from './routes/router';
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 10000;
 clear(true);
 
 // Deshabilita el header 'x-powered-by' por seguridad

@@ -2,12 +2,14 @@ import sqlite3 from 'sqlite3';
 import { open, Database } from 'sqlite';
 
 export interface Contact {
-    email: string;
     name: string;
+    email: string;
     phone: string;
     message: string;
     ip: string;
     date: string;
+    country: string;
+    city: string;
 }
 
 export class ContactsModel {
@@ -34,7 +36,9 @@ export class ContactsModel {
                 phone TEXT,
                 message TEXT,
                 ip TEXT,
-                date TEXT
+                date TEXT,
+                country TEXT,
+                city TEXT
             )`
         );
     }
@@ -42,22 +46,17 @@ export class ContactsModel {
     // Guarda un contacto
     static async saveContact(contact: Contact) {
         if (!this.db) throw new Error('Database not initialized');
-        try {
-            await this.db.run(
-                'INSERT INTO contacts (email, name, phone, message, ip, date) VALUES (?, ?, ?, ?, ?, ?)',
-                contact.email, contact.name, contact.phone, contact.message, contact.ip, contact.date
-            );
-        } catch (error) {
-            console.error('Error guardando contacto:', error);
-            throw error;
-        }
+        await this.db.run(
+            'INSERT INTO contacts (email, name, phone, message, ip, date, country, city) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+            contact.email, contact.name, contact.phone, contact.message, contact.ip, contact.date, contact.country, contact.city
+        );
     }
 
     // Obtiene todos los contactos
     static async getContacts() {
         if (!this.db) throw new Error('Database not initialized');
         try {
-            return await this.db.all('SELECT ID, email, name, phone, message, ip, date FROM contacts');
+            return await this.db.all('SELECT ID, email, name, phone, message, ip, date, country, city FROM contacts');
         } catch (error) {
             console.error('Error obteniendo contactos:', error);
             throw error;

@@ -6,10 +6,12 @@
                     <th>ID</th>
                     <th>Nombre</th>
                     <th>Email</th>
-                    <th>Phone</th>
-                    <th>Message</th>
+                    <th>Telefono</th>
+                    <th>Mensaje</th>
                     <th>Ip</th>
-                    <th>Date</th>
+                    <th>Fecha</th>
+                    <th>Pais</th>
+                    <th>Ciudad</th>
                 
                     <% contacts.forEach(element => { %>
                     <tr>
@@ -33,6 +35,12 @@
                         </td>
                         <td>
                             <p><%= element.date %></p>
+                        </td>
+                        <td>
+                            <p><%= element.country %></p>
+                        </td>
+                        <td>
+                            <p><%= element.city %></p>
                         </td>
                     </tr>
                     <% }) %>
