@@ -5,6 +5,7 @@ import { ContactsModel } from './models/contactsModel';
 import router from './routes/router';
 
 const app = express();
+app.set('trust proxy', true);
 const PORT = process.env.PORT || 10000;
 clear(true);
 

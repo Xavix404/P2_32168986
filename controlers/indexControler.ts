@@ -13,7 +13,7 @@ export class contactControler {
             .isEmail()
             .withMessage('El email es obligatorio'),
         check('phone')
-            .matches(/^0?(412|414|416|424)-?\d{7}$/)
+            .matches(/^0?(412|414|416|424|426)-?\d{7}$/)
             .withMessage('El número de teléfono no es válido'),
         check('message')
             .notEmpty()
