@@ -571,7 +571,7 @@ table, th, td {
     background: #002132EE;
 }
 
-.card_grp select{
+.card_grp select, .selectService{
     padding: 0.8rem;
     text-align: center;
     border: 2px solid #6CB0DD;
@@ -721,6 +721,7 @@ table, th, td {
         min-height: 100vh;
         width: 100%;
         margin: 0 auto;
+        border-radius: 0;
     }
 }
 

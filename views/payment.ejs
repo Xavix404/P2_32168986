@@ -5,17 +5,25 @@
         <div class="payment">
             <h2>Pago</h2>
             <form class="form" action="/payment" method="POST">
-                <div class="card space iconRelative">
+                <div class="space iconRelative">
                     <label for="email">Correo Electronico</label>
                     <input type="email" id="email" class="input" name="email" placeholder="example@gmail.com" required>
                     <ion-icon name="mail-outline"></ion-icon>
                 </div>
-                <div class="card space iconRelative">
+                <div class="space iconRelative">
+                    <label for="service">Servicio</label>
+                    <select class="input selectService" id="service" name="service" required>
+                        <option value="reparacion">Reparación</option>
+                        <option value="mantenimiento">Mantenimiento</option>
+                        <option value="diagnostico">Diagnóstico</option>
+                    </select>
+                </div> 
+                <div class="space iconRelative">
                     <label for="cardHolder">Nombre del titular</label>
                     <input type="text" id="cardHolder" class="input" name="cardHolder" placeholder="Fidel Castro" required>
                     <ion-icon name="person-circle-outline"></ion-icon>
                 </div>
-                <div class="card space iconRelative">
+                <div class="space iconRelative">
                     <label for="cardNumber">Numero de tarjeta</label>
                     <input type="text" id="cardNumber" class="input" name="cardNumber" placeholder="card number" required data-mask="0000 0000 0000 0000">
                     <ion-icon name="card-outline"></ion-icon>
@@ -38,12 +46,13 @@
                     <ion-icon name="key-outline"></ion-icon>
                 </div>
                 <div class="card_grp space">
-                    <div class="card space iconRelative">
+                    <div class="space iconRelative">
                         <label for="amount">Monto</label>
-                        <input type="text" id="amount" class="input cardItem" name="amount" value="1000" readonly>
+                        <input type="text" id="amount" class="input cardItem" name="amount_display" value="1000" readonly>
+                        <input type="hidden" id="amountHidden" name="amount" value="1000">
                         <ion-icon name="cash-outline"></ion-icon>
                     </div>
-                    <div class="card space iconRelative">
+                    <div class="space iconRelative">
                         <label for="currency">Moneda</label>
                         <select class="input" id="currency" name="currency" required>
                             <option value="USD">USD</option>
@@ -62,5 +71,19 @@
         </div>
     </div>
 </main>
+
+<script>
+const servicePrices = {
+    reparacion: 1000,
+    mantenimiento: 700,
+    diagnostico: 400
+};
+
+document.getElementById('service').addEventListener('change', function() {
+    const price = servicePrices[this.value];
+    document.getElementById('amount').value = price;
+    document.getElementById('amountHidden').value = price;
+});
+</script>
 
 <%- include('template/footer.ejs') %>

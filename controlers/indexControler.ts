@@ -142,12 +142,6 @@ export class contactControler {
         }
     }
 
-    static async paymentSuccess(req: Request, res: Response) {
-        res.render('paymentSuccess', {
-            title: "RefriExpert-Payment",
-        });
-    }
-
     static async getPayment(req: Request, res: Response) {
         res.render('payment', {
             title: "RefriExpert-Payment",
@@ -187,9 +181,9 @@ export class contactControler {
                 }, null, 2)
             });
 
-            console.log('Status de respuesta:', response.status);
+            // console.log('Status de respuesta:', response.status);
             const text = await response.text();
-            console.log('Respuesta de la API:', text);
+            // console.log('Respuesta de la API:', text);
 
             let result;
             try {
@@ -201,7 +195,7 @@ export class contactControler {
             if (result.success) {
                 return res.render('paymentSuccess', { title: "Pago Exitoso" });
             } else {
-                return res.render('payment', { title: "Pago", error: "Pago rechazado. Intenta de nuevo." });
+                return res.render('payment', { title: "Pago", error: result.message });
             }
         } catch (error) {
             console.log('Error en el pago:', error);
