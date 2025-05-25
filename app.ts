@@ -3,10 +3,13 @@ import clear from 'console-clear';
 import bodyParser from 'body-parser';
 import { ContactsModel } from './models/contactsModel';
 import router from './routes/router';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const app = express();
 app.set('trust proxy', true);
-const PORT = process.env.PORT || 10000;
+const PORT = process.env.PORT || 3000;
 clear(true);
 
 // Deshabilita el header 'x-powered-by' por seguridad

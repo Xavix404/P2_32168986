@@ -417,6 +417,7 @@ nav li:first-child{
     font-family: inherit;
     resize: none;
     min-height: 8.8rem;
+    margin-bottom: 1.3rem;
 }
 
 .contact button{
@@ -436,18 +437,9 @@ nav li:first-child{
     background: #002132EE
 }
 
-
-
-.formulario__input-error {
-    color: #FE2D48;
-    max-width: 80%;
-	font-size: 1rem;
-	margin-bottom: 0;
-	display: none;
-}
-
-.formulario__input-error-activo {
-	display: inline;
+.input-error {
+    border: 2px solid #FE2D48 !important;
+    background: #fff0f3;
 }
 
 

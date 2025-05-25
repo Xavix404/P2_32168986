@@ -116,7 +116,7 @@
                 <div class="contactForm">
                     <form id="form" action="/send#contact" method="post">
                         
-                        <input class="campo" type="text" id="name" name="name" placeholder="Nombre">
+                        <input class="campo<% if (errors && errors.some(e => e.path === 'name')) { %> input-error<% } %>" type="text" id="name" name="name" placeholder="Nombre" value="<%= data.name || '' %>">
                         
                         <% if (errors) {%>
                             <% errors.forEach(error => { %>
@@ -125,7 +125,7 @@
                                 <% } %>
                             <% }); %>
                         <% } %>
-                        <input class="campo" type="email" id="email" name="email" placeholder="Correo">
+                        <input class="campo<% if (errors && errors.some(e => e.path === 'email')) { %> input-error<% } %>" type="email" id="email" name="email" placeholder="Correo" value="<%= data.email || '' %>">
                         <% if (errors) {%>
                             <% errors.forEach(error => { %>
                                 <% if (error.path == 'email') { %>
@@ -134,7 +134,7 @@
                             <% }); %>
                         <% } %>
 
-                        <input class="campo" type="tel" id="phone" name="phone" placeholder="Teléfono">
+                        <input class="campo<% if (errors && errors.some(e => e.path === 'phone')) { %> input-error<% } %>" type="tel" id="phone" name="phone" placeholder="Teléfono" value="<%= data.phone || '' %>">
                         <% if (errors) {%>
                             <% errors.forEach(error => { %>
                                 <% if (error.path == 'phone') { %>
@@ -143,11 +143,21 @@
                             <% }); %>
                         <% } %>
 
-                        <textarea class="campo" name="message" id="message" placeholder="Mensaje"></textarea>
+                        <textarea class="campo<% if (errors && errors.some(e => e.path === 'message')) { %> input-error<% } %>" name="message" id="message" placeholder="Mensaje"><%= data.message || '' %></textarea>
                         <% if (errors) {%>
                             <% errors.forEach(error => { %>
                                 <% if (error.path == 'message') { %>
                                     <p style="color: #FE2D48; padding: 0; margin: 0; text-align: center;"><%= error.msg %></p>
+                                <% } %>
+                            <% }); %>
+                        <% } %>
+
+                        <div class="g-recaptcha" data-sitekey="6Lf710crAAAAALNoQ1kK0djLTHePRVOoafx5UYrr"></div>
+                        
+                        <% if (errors && errors.length) { %>
+                            <% errors.forEach(error => { %>
+                                <% if (!error.path) { %>
+                                <p class="form-error" style="color: #FE2D48; text-align: center;"><%= error.msg %></p>
                                 <% } %>
                             <% }); %>
                         <% } %>

@@ -7,6 +7,6 @@ router.post('/send', contactControler.validateData, contactControler.add);
 router.get('/admin', contactControler.getContacts);
 router.post('/admin/clear', contactControler.clearContacts);
 router.get('/payment', contactControler.getPayment);
-router.post('/paymentSuccess', contactControler.paymentSuccess);
+router.post('/payment', contactControler.processPayment);
 
 export default router;
