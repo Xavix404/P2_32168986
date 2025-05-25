@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Login</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            min-height: 100dvh;
+            background: #e8fffc;
+            color: #111621;
+            font-family: Arial, Helvetica, sans-serif;
+            overflow-x: hidden;
+        }
+        .container{
+            min-height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .container h2{
+            font-size: clamp(1.3rem, calc(7vw + 1rem), 2rem);
+            border-bottom: #111621 solid 3px;
+            margin-bottom: 30px;
+        }
+        .container form{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+        }
+        .container input{
+            width: 100%;
+            padding: 13px;
+            text-align: center;
+            border: 2px solid #6CB0DD;
+            border-radius: 5px;
+            letter-spacing: 1px;
+            word-wrap: 3px;
+            outline: none;
+            font-size: 1rem;
+            color: #111621;
+        }
+        .container button{
+            padding: 1rem;
+            margin: 1.3rem 0;
+            font-size: 1rem;
+            border: none;
+            outline: none;
+            background: #002132;
+            color: #f3f3f3;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .container button:hover{
+            background: #002132EE;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Acceso Admin</h2>
+        <% if (error) { %>
+            <p style="color:red;"><%= error %></p>
+        <% } %>
+        <form method="POST" action="/admin">
+            <input type="password" name="password" placeholder="Contraseña" required>
+            <button type="submit">Entrar</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,9 +1,10 @@
 import express from 'express';
 import clear from 'console-clear';
 import bodyParser from 'body-parser';
-import { ContactsModel } from './models/contactsModel';
+import { ContactsModel } from './models/Model';
 import router from './routes/router';
 import dotenv from 'dotenv';
+import session from 'express-session';
 
 dotenv.config();
 
@@ -19,6 +20,13 @@ app.disable('x-powered-by');
 app.use(bodyParser.json());
 // Middleware para parsear datos de formularios (urlencoded)
 app.use(bodyParser.urlencoded({ extended: true }));
+
+// Middleware para proteger la ruta /admin
+app.use(session({
+    secret: process.env.SESSION_SECRET || 'unasecretasegura',
+    resave: false,
+    saveUninitialized: true
+}));
 
 // Sirve archivos estáticos desde la carpeta 'public'
 app.use(express.static(__dirname + "/public"));
