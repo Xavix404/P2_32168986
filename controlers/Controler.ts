@@ -158,20 +158,6 @@ export class contactControler {
         }
     }
 
-    static async processFakePayment(paymentData: any) {
-        const response = await fetch('https://fakepayment.onrender.com/pay', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(paymentData)
-        });
-        const text = await response.text();
-        try {
-            return JSON.parse(text);
-        } catch {
-            throw new Error('Respuesta inválida de la API de pago');
-        }
-    }
-
     static async sendContactEmail(data: Contact, recipients: string[]) {
         const transporter = nodemailer.createTransport({
             service: 'gmail',
