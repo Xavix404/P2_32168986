@@ -491,6 +491,20 @@ table, th, td {
     background: #111621EE;
 }
 
+.btn-logout {
+    background: #FE2D48;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 18px;
+    margin-left: 10px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.btn-logout:hover {
+    background: #FE2D48EE;
+}
+
 /*payment*/
 
 .payment{

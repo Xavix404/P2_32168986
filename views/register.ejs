@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro de Usuario</title>
+    <style>
+        body {
+            background: #f5f6fa;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+        .register-container {
+            max-width: 400px;
+            margin: 60px auto;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            padding: 32px 28px;
+        }
+        .register-container h2 {
+            color: #2d3436;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 18px;
+        }
+        label {
+            display: block;
+            margin-bottom: 6px;
+            color: #636e72;
+        }
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #dfe6e9;
+            border-radius: 6px;
+            font-size: 1em;
+            background: #f9f9f9;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #0984e3;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        button:hover {
+            background: #74b9ff;
+        }
+        .login-link {
+            display: block;
+            text-align: center;
+            margin-top: 18px;
+            color: #636e72;
+        }
+        .login-link a {
+            color: #0984e3;
+            text-decoration: none;
+        }
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+        .error-message {
+            color: #e84118;
+            background: #ffe6e6;
+            border: 1px solid #e84118;
+            border-radius: 6px;
+            padding: 10px;
+            margin-bottom: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="register-container">
+        <h2>Registro de Usuario</h2>
+        <% if (typeof error !== 'undefined') { %>
+            <div class="error-message"><%= error %></div>
+        <% } %>
+        <form action="/register" method="POST">
+            <div class="form-group">
+                <label for="username">Usuario</label>
+                <input type="text" id="username" name="username" required autocomplete="username">
+            </div>
+            <div class="form-group">
+                <label for="password">Contraseña</label>
+                <input type="password" id="password" name="password" required autocomplete="new-password">
+            </div>
+            <button type="submit">Registrarse</button>
+        </form>
+        <div class="login-link">
+            ¿Ya tienes cuenta? <a href="/login">Inicia sesión</a>
+        </div>
+    </div>
+</body>
+</html>

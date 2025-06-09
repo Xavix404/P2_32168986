@@ -5,6 +5,8 @@ import { ContactsModel } from './models/Model';
 import router from './routes/router';
 import dotenv from 'dotenv';
 import session from 'express-session';
+import passport from 'passport';
+import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
 
 dotenv.config();
 
@@ -21,19 +23,42 @@ app.use(bodyParser.json());
 // Middleware para parsear datos de formularios (urlencoded)
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Middleware para proteger la ruta /admin
-app.use(session({
-    secret: process.env.SESSION_SECRET || 'unasecretasegura',
-    resave: false,
-    saveUninitialized: true
-}));
-
 // Sirve archivos estáticos desde la carpeta 'public'
 app.use(express.static(__dirname + "/public"));
 
 // Configura EJS como motor de plantillas
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views');
+
+// Configuración de la sesión
+app.use(session({
+    secret: 'clave_super_segura',
+    resave: false,
+    saveUninitialized: false,
+    cookie: { secure: false } // Usa true solo si usas HTTPS
+}));
+
+passport.use(new GoogleStrategy({
+    clientID: process.env.GOOGLE_CLIENT_ID!,
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+    callbackURL: process.env.GOOGLE_CALLBACK_URL!
+},
+function(accessToken, refreshToken, profile, done) {
+    // Aquí puedes buscar/crear el usuario en tu base de datos
+    // Por simplicidad, solo pasamos el perfil
+    return done(null, profile);
+}
+));
+
+passport.serializeUser((user, done) => {
+    done(null, user);
+});
+passport.deserializeUser((obj, done) => {
+    done(null, obj as any);
+});
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Usa el router principal
 app.use('/', router);

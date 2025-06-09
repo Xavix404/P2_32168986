@@ -1,5 +1,6 @@
 import sqlite3 from 'sqlite3';
 import { open, Database } from 'sqlite';
+import bcrypt from 'bcrypt';
 
 export interface Contact {
     name: string;
@@ -12,8 +13,27 @@ export interface Contact {
     city: string;
 }
 
+
 export class ContactsModel {
     private static db: Database | null = null;
+
+    static async findByUsername(username: string) {
+        if (!this.db) throw new Error('Database not initialized');
+        return this.db.get('SELECT * FROM users WHERE username = ?', [username]);
+    }
+
+    static async comparePassword(password: string, hash: string) {
+        return bcrypt.compare(password, hash);
+    }
+
+    static async createUser(username: string, password: string) {
+        const hash = await bcrypt.hash(password, 10);
+        if (!this.db) throw new Error('Database not initialized');
+        return this.db.run(
+            `INSERT INTO users (username, password_hash) VALUES (?, ?)`,
+            [username, hash]
+        );
+    }
 
     // Inicializa la conexión una sola vez
     static async initDb() {
@@ -40,6 +60,14 @@ export class ContactsModel {
                 country TEXT,
                 city TEXT
             )`
+        );
+        await this.db.run(
+            `CREATE TABLE IF NOT EXISTS users (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                username TEXT UNIQUE,
+                password_hash TEXT,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            );`
         );
     }
 

@@ -3,6 +3,16 @@ import { check, validationResult } from "express-validator";
 import { ContactsModel, Contact } from "../models/Model";
 import fetch from 'node-fetch';
 import nodemailer from 'nodemailer';
+import session from 'express-session';
+
+// Extiende la interfaz de sesión para incluir propiedades personalizadas
+declare module 'express-session' {
+    interface SessionData {
+        userId?: number;
+        username?: string;
+        isAdmin?: boolean;
+    }
+}
 
 export class contactControler {
     // Validaciones para los campos del formulario
@@ -28,7 +38,9 @@ export class contactControler {
         res.render('index', {
             title: "RefriExpert",
             errors: [],
-            data: {}
+            data: {},
+            isLoggedIn: !!req.session.userId,
+            isAdmin: req.session.isAdmin // <-- agrega esto
         });
     }
 
@@ -41,7 +53,9 @@ export class contactControler {
                 return res.render('index', {
                     title: "RefriExpert",
                     errors: errors.array(),
-                    data: req.body
+                    data: req.body,
+                    isLoggedIn: !!req.session.userId,
+                    isAdmin: req.session.isAdmin // <-- agrega esto
                 });
             }
 
@@ -90,7 +104,12 @@ export class contactControler {
     static async getContacts(req: Request, res: Response) {
         try {
             const contacts = await ContactsModel.getContacts();
-            res.render('admin', { contacts: contacts, title: "RefriExpert-Admin" });
+            res.render('admin', {
+                contacts: contacts,
+                title: "RefriExpert-Admin",
+                isLoggedIn: !!req.session.userId, 
+                isAdmin: req.session.isAdmin      
+            });
         } catch (error) {
             res.status(500).send('Error al obtener los contactos');
             console.error('Error al obtener los contactos:', error);
@@ -100,6 +119,7 @@ export class contactControler {
     static async getPayment(req: Request, res: Response) {
         res.render('payment', {
             title: "RefriExpert-Payment",
+            isAdmin: req.session.isAdmin
         });
     }
 
@@ -201,5 +221,63 @@ export class contactControler {
         };
 
         await transporter.sendMail(mailOptions);
+    }
+
+    static async getRegister(req: Request, res: Response) {
+        res.render('register', { title: "RefriExpert-Register", isAdmin: req.session.isAdmin });
+    }
+
+    static async registerUser(req: Request, res: Response) {
+        const { username, password } = req.body;
+        try {
+            await ContactsModel.createUser(username, password);
+            res.redirect('/login');
+        } catch (error: any) {
+            if (error.code === 'SQLITE_CONSTRAINT') {
+                res.status(400).render('register', { error: 'El usuario ya existe.', isAdmin: req.session.isAdmin });
+            } else {
+                res.status(400).render('register', { error: 'Error en el registro.', isAdmin: req.session.isAdmin });
+            }
+        }
+    }
+
+    static async getLogin(req: Request, res: Response) {
+        res.render('login', { title: "RefriExpert-Login", isAdmin: req.session.isAdmin });
+    }
+
+    static async loginUser(req: Request, res: Response) {
+        const { username, password } = req.body;
+        try {
+            const user = await ContactsModel.findByUsername(username);
+            if (!user) {
+                return res.status(401).render('login', { error: 'Usuario o contraseña incorrectos.', isAdmin: req.session.isAdmin });
+            }
+            const isMatch = await ContactsModel.comparePassword(password, user.password_hash);
+            if (!isMatch) {
+                return res.status(401).render('login', { error: 'Usuario o contraseña incorrectos.', isAdmin: req.session.isAdmin });
+            }
+            req.session.userId = user.id;
+            req.session.username = user.username;
+            req.session.isAdmin = (user.username === 'admin' && password === 'passwordadmin');
+            // Redirige según si es admin o no
+            if (req.session.isAdmin) {
+                res.redirect('/admin');
+            } else {
+                res.redirect('/');
+            }
+        } catch (error) {
+            console.error('Error al iniciar sesión:', error);
+            res.status(500).send('Error del servidor');
+        }
+    }
+
+    static async logoutUser(req: Request, res: Response) {
+        req.session.destroy((err) => {
+            if (err) {
+                console.error('Error al cerrar sesión:', err);
+                return res.status(500).send('Error del servidor');
+            }
+            res.redirect('/');
+        });
     }
 }

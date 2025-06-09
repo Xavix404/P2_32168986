@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Iniciar Sesión</title>
+    <style>
+        body {
+            background: #f5f6fa;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+        .login-container {
+            max-width: 400px;
+            margin: 60px auto;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            padding: 32px 28px;
+        }
+        .login-title {
+            color: #2d3436;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 18px;
+        }
+        .form-label {
+            display: block;
+            margin-bottom: 6px;
+            color: #636e72;
+        }
+        .form-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #dfe6e9;
+            border-radius: 6px;
+            font-size: 1em;
+            background: #f9f9f9;
+        }
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            background: #0984e3;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .login-btn:hover {
+            background: #74b9ff;
+        }
+        .register-link {
+            display: block;
+            text-align: center;
+            margin-top: 18px;
+            color: #636e72;
+        }
+        .register-link a {
+            color: #0984e3;
+            text-decoration: none;
+        }
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+        .error-message {
+            color: #d63031;
+            background: #ffeaea;
+            border: 1px solid #fab1a0;
+            border-radius: 6px;
+            padding: 10px;
+            margin-bottom: 18px;
+            text-align: center;
+        }
+        .google-btn {
+            display: inline-block;
+            width: 100%;
+            padding: 12px;
+            background: #4285f4;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 1em;
+            text-align: center;
+            cursor: pointer;
+            transition: background 0.2s;
+            text-decoration: none;
+        }
+        .google-btn:hover {
+            background: #357ae8;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2 class="login-title">Iniciar Sesión</h2>
+        <% if (typeof error !== 'undefined' && error) { %>
+            <div class="error-message">
+                <%= error %>
+            </div>
+        <% } %>
+        <form action="/login" method="POST" class="login-form">
+            <div class="form-group">
+                <label for="username" class="form-label">Usuario</label>
+                <input type="text" id="username" name="username" required autocomplete="username" class="form-input">
+            </div>
+            <div class="form-group">
+                <label for="password" class="form-label">Contraseña</label>
+                <input type="password" id="password" name="password" required autocomplete="current-password" class="form-input">
+            </div>
+            <button type="submit" class="login-btn">Entrar</button>
+        </form>
+        <div style="text-align:center; margin-top:16px;">
+            <a href="/auth/google" class="google-btn">
+                <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google" style="height:20px;vertical-align:middle;margin-right:8px;">
+                Iniciar sesión con Google
+            </a>
+        </div>
+        <div class="register-link">
+            ¿No tienes cuenta? <a href="/register">Regístrate</a>
+        </div>
+    </div>
+</body>
+</html>
