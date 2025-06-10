@@ -40,7 +40,7 @@ export class contactControler {
             errors: [],
             data: {},
             isLoggedIn: !!req.session.userId,
-            isAdmin: req.session.isAdmin // <-- agrega esto
+            isAdmin: req.session.isAdmin
         });
     }
 
@@ -55,7 +55,7 @@ export class contactControler {
                     errors: errors.array(),
                     data: req.body,
                     isLoggedIn: !!req.session.userId,
-                    isAdmin: req.session.isAdmin // <-- agrega esto
+                    isAdmin: req.session.isAdmin
                 });
             }
 
@@ -126,7 +126,7 @@ export class contactControler {
     static async clearContacts(req: Request, res: Response) {
         try {
             await ContactsModel.clearAll();
-            res.redirect('/admin'); // O renderiza un mensaje de éxito
+            res.redirect('/admin');
         } catch (error) {
             console.error('Error al limpiar la base de datos:', error);
             res.status(500).render('500', { title: 'Error del servidor' });
@@ -242,7 +242,10 @@ export class contactControler {
     }
 
     static async getLogin(req: Request, res: Response) {
-        res.render('login', { title: "RefriExpert-Login", isAdmin: req.session.isAdmin });
+        res.render('login', {
+            title: "RefriExpert-Login",
+            isAdmin: req.session.isAdmin
+        });
     }
 
     static async loginUser(req: Request, res: Response) {

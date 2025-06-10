@@ -14,12 +14,7 @@ declare module 'express-session' {
 
 // Middleware para proteger la ruta admin
 function requireAdmin(req: express.Request, res: express.Response, next: express.NextFunction) {
-    if (
-        req.session &&
-        req.session.userId &&
-        req.session.username === 'admin' &&
-        req.session.isAdmin === true
-    ) {
+    if (req.session && req.session.isAdmin) {
         return next();
     }
     res.status(403).render('login', { error: 'Acceso solo para administradores.' });
@@ -34,8 +29,8 @@ router.get('/admin', requireAdmin, contactControler.getContacts);
 router.post('/admin/clear', contactControler.clearContacts);
 router.get('/payment', contactControler.getPayment);
 router.post('/payment', contactControler.processPayment);
-router.get('/register', contactControler.getRegister);
-router.post('/register', contactControler.registerUser);
+router.get('/register', requireAdmin, contactControler.getRegister);
+router.post('/register', requireAdmin, contactControler.registerUser);
 router.get('/login', contactControler.getLogin);
 router.post('/login', contactControler.loginUser);
 router.get('/logout', contactControler.logoutUser);
@@ -50,22 +45,20 @@ router.get('/auth/google',
 router.get('/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/login' }),
   (req, res) => {
-    // Guarda en la sesión que el usuario está logueado
-    if (req.user) {
-      req.session.userId = (req.user as any).id || (req.user as any).email || 'googleUser';
-      req.session.isLoggedIn = true;
-      // Si quieres, puedes detectar si es admin por email:
-      req.session.isAdmin = (req.user as any).emails && (req.user as any).emails[0].value === 'admin@tucorreo.com';
+    // Verifica que el email sea refriexpert491@gmail.com
+    const email = (req.user as any)?.emails?.[0]?.value;
+    if (email === 'refriexpert491@gmail.com') {
+      req.session.userId = email;
+      req.session.isAdmin = true;
+      req.session.username = 'admin';
+      return res.redirect('/admin');
     } else {
-      req.session.userId = 0; // or another appropriate number as a fallback
-      req.session.isLoggedIn = true;
-      req.session.isAdmin = false;
+      req.logout(() => {});
+      return res.render('login', { error: 'Solo el administrador puede iniciar sesión con Google.' });
     }
-    res.redirect('/');
   }
 );
 
-// Cerrar sesión Google (opcional, igual que tu logoutUser)
 router.get('/logout', (req, res) => {
   req.logout(() => {
     res.redirect('/');
