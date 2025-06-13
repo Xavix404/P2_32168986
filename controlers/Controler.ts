@@ -248,13 +248,14 @@ export class contactControler {
     static async registerUser(req: Request, res: Response) {
         const { username, password } = req.body;
         try {
-            await ContactsModel.createUser(username, password);
-            res.redirect('/login');
+            const isAdmin = true;
+            await ContactsModel.createUser(username, password, isAdmin);
+            res.redirect('/admin');
         } catch (error: any) {
             if (error.code === 'SQLITE_CONSTRAINT') {
-                res.status(400).render('register', { error: 'El usuario ya existe.', isAdmin: req.session.isAdmin });
+                res.status(400).render('register', { error: 'El usuario ya existe.' });
             } else {
-                res.status(400).render('register', { error: 'Error en el registro.', isAdmin: req.session.isAdmin });
+                res.status(400).render('register', { error: 'Error en el registro.' });
             }
         }
     }
@@ -271,23 +272,17 @@ export class contactControler {
         try {
             const user = await ContactsModel.findByUsername(username);
             if (!user) {
-                return res.status(401).render('login', { error: 'Usuario o contraseña incorrectos.', isAdmin: req.session.isAdmin });
+                return res.status(401).render('login', { error: 'Usuario o contraseña incorrectos.' });
             }
             const isMatch = await ContactsModel.comparePassword(password, user.password_hash);
             if (!isMatch) {
-                return res.status(401).render('login', { error: 'Usuario o contraseña incorrectos.', isAdmin: req.session.isAdmin });
+                return res.status(401).render('login', { error: 'Usuario o contraseña incorrectos.' });
             }
             req.session.userId = user.id;
             req.session.username = user.username;
-            req.session.isAdmin = (user.username === 'admin' && password === 'passwordadmin');
-            // Redirige según si es admin o no
-            if (req.session.isAdmin) {
-                res.redirect('/admin');
-            } else {
-                res.redirect('/');
-            }
+            req.session.isAdmin = user.isAdmin; // si quieres seguir distinguiendo admins
+            res.redirect('/admin');
         } catch (error) {
-            console.error('Error al iniciar sesión:', error);
             res.status(500).send('Error del servidor');
         }
     }

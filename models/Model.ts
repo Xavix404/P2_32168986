@@ -26,7 +26,7 @@ export class ContactsModel {
         return bcrypt.compare(password, hash);
     }
 
-    static async createUser(username: string, password: string) {
+    static async createUser(username: string, password: string, isAdmin: boolean) {
         const hash = await bcrypt.hash(password, 10);
         if (!this.db) throw new Error('Database not initialized');
         return this.db.run(

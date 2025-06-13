@@ -12,12 +12,12 @@ declare module 'express-session' {
   }
 }
 
-// Middleware para proteger la ruta admin
-function requireAdmin(req: express.Request, res: express.Response, next: express.NextFunction) {
-    if (req.session && req.session.isAdmin) {
+// Middleware para requerir autenticación
+function requireAuth(req: express.Request, res: express.Response, next: express.NextFunction) {
+    if (req.session && req.session.userId) {
         return next();
     }
-    res.status(403).render('login', { error: 'Acceso solo para administradores.' });
+    res.status(403).render('login', { error: 'Debes iniciar sesión para acceder.' });
 }
 
 const router = express.Router();
@@ -25,14 +25,14 @@ const router = express.Router();
 router.get('/', contactControler.getALL);
 router.post('/send', contactControler.validateData, contactControler.add);
 // Protege la ruta admin:
-router.get('/admin', requireAdmin, contactControler.getContacts);
-router.post('/admin/clear', contactControler.clearContacts);
+router.get('/admin', requireAuth, contactControler.getContacts);
+router.post('/admin/clear', requireAuth, contactControler.clearContacts);
 router.get('/payment', contactControler.getPayment);
 router.post('/payment', contactControler.processPayment);
-router.get('/pagos', requireAdmin, contactControler.getPagos);
-router.post('/pagos/clear', contactControler.clearPagos);
-router.get('/register', requireAdmin, contactControler.getRegister);
-router.post('/register', requireAdmin, contactControler.registerUser);
+router.get('/pagos', requireAuth, contactControler.getPagos);
+router.post('/pagos/clear', requireAuth, contactControler.clearPagos);
+router.get('/register', requireAuth, contactControler.getRegister);
+router.post('/register', requireAuth, contactControler.registerUser);
 router.get('/login', contactControler.getLogin);
 router.post('/login', contactControler.loginUser);
 router.get('/logout', contactControler.logoutUser);
