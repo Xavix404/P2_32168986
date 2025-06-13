@@ -1,18 +1,38 @@
 {
   "compilerOptions": {
     "target": "esnext",
+    "outDir": "./",
     "module": "commonjs",
-    "outDir": "./dist",
-    "rootDir": "./",
     "strict": true,
     "esModuleInterop": true,
-    "skipLibCheck": true
+    "typeRoots": [
+      "./node_modules/@types",
+      "./src/types"
+    ],
+    "types": [
+      "node"
+    ],
+
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "incremental": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true
   },
   "include": [
-    "**/*.ts"
+    "*.ts",
+    "**/**/*.ts",
+    "**/**/**/*.ts", "app.ts", "routes/router.ts",
   ],
   "exclude": [
     "node_modules",
-    "dist"
+    "build",
+    ".next"
   ]
 }
