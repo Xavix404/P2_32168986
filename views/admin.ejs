@@ -1,7 +1,24 @@
 <%- include('template/cabecera.ejs') %>
     <main>
         <div class="adminPanel">
-            <h1 class="adminTitle">Admin Panel</h1>
+            <h2 class="adminTitle">Contactos</h2>
+
+            <div class="filter-bar">
+                <label>
+                    Nombre:
+                    <input type="text" id="filtroNombre" placeholder="Buscar por nombre">
+                </label>
+                <label>
+                    Email:
+                    <input type="text" id="filtroEmail" placeholder="Buscar por email">
+                </label>
+                <label>
+                    Fecha:
+                    <input type="date" id="filtroFecha">
+                </label>
+                <button onclick="filtrarContactos()">Buscar</button>
+            </div>
+
             <table class="adminTable">
                     <th>ID</th>
                     <th>Nombre</th>
@@ -48,8 +65,28 @@
             </table>
 
             <form action="/admin/clear" method="post" onsubmit="return confirm('¿Estás seguro de que deseas borrar todos los contactos?');">
-                <button type="submit" class="btn-danger">Limpiar base de datos</button>
+                <button type="submit" class="btn-admin">Limpiar base de datos</button>
             </form>
+
+            <a class="admin-link" href="/pagos">Pagos</a>
         </div>
     </main>
+    <script>
+    function filtrarContactos() {
+        const nombre = document.getElementById('filtroNombre').value.toLowerCase();
+        const email = document.getElementById('filtroEmail').value.toLowerCase();
+        const fecha = document.getElementById('filtroFecha').value;
+        const filas = document.querySelectorAll('.adminTable tbody tr');
+        filas.forEach(fila => {
+            const tdNombre = fila.children[1].textContent.toLowerCase();
+            const tdEmail = fila.children[2].textContent.toLowerCase();
+            const tdFecha = fila.children[6].textContent; // Ajusta el índice según tu tabla
+            let mostrar = true;
+            if (nombre && !tdNombre.includes(nombre)) mostrar = false;
+            if (email && !tdEmail.includes(email)) mostrar = false;
+            if (fecha && tdFecha !== fecha) mostrar = false;
+            fila.style.display = mostrar ? '' : 'none';
+        });
+    }
+    </script>
 <%- include('template/footer.ejs') %>

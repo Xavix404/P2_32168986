@@ -67,7 +67,16 @@ export class ContactsModel {
                 username TEXT UNIQUE,
                 password_hash TEXT,
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-            );`
+            )`
+        );
+        await this.db.run(`
+            CREATE TABLE IF NOT EXISTS pagos (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                servicio TEXT,
+                monto REAL,
+                fecha TEXT,
+                estado TEXT
+            )`
         );
     }
 
@@ -77,6 +86,15 @@ export class ContactsModel {
         await this.db.run(
             'INSERT INTO contacts (email, name, phone, message, ip, date, country, city) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
             contact.email, contact.name, contact.phone, contact.message, contact.ip, contact.date, contact.country, contact.city
+        );
+    }
+
+    // Obtiene todos los pagos
+    static async addPago(servicio: string, monto: number, fecha: string, estado: string) {
+        if (!this.db) throw new Error('Database not initialized');
+        await this.db.run(
+            `INSERT INTO pagos (servicio, monto, fecha, estado) VALUES (?, ?, ?, ?)`,
+            [servicio, monto, fecha, estado]
         );
     }
 
@@ -91,9 +109,25 @@ export class ContactsModel {
         }
     }
 
+    // obtiene todos los pagos
+    static async getPagos() {
+        if (!this.db) throw new Error('Database not initialized');
+        try {
+            return await this.db.all('SELECT * FROM pagos');
+        } catch (error) {
+            console.error('Error obteniendo pagos:', error);
+            throw error;
+        }
+    }
+
     // Elimina todos los contactos
-    static async clearAll() {
+    static async clearContacts() {
         if (!this.db) throw new Error('Database not initialized');
         await this.db.run('DELETE FROM contacts');
+    }
+
+    static async clearPagos() {
+        if (!this.db) throw new Error('Database not initialized');
+        await this.db.run('DELETE FROM pagos');
     }
 }

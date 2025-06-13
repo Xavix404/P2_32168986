@@ -3,9 +3,6 @@ import { check, validationResult } from "express-validator";
 import { ContactsModel, Contact } from "../models/Model";
 import fetch from 'node-fetch';
 import nodemailer from 'nodemailer';
-import session from 'express-session';
-
-// Extiende la interfaz de sesión para incluir propiedades personalizadas
 declare module 'express-session' {
     interface SessionData {
         userId?: number;
@@ -37,6 +34,11 @@ export class contactControler {
     static async getALL(req: Request, res: Response) {
         res.render('index', {
             title: "RefriExpert",
+            ogTitle: "RefriExpert - Servicio profesional de refrigeración",
+            ogDescription: "Soluciones rápidas y profesionales para tu refrigerador.",
+            ogType: "website",
+            ogUrl: "http://localhost:10000/",
+            ogImage: "http://localhost:10000/img/og-index.jpg",
             errors: [],
             data: {},
             isLoggedIn: !!req.session.userId,
@@ -107,6 +109,11 @@ export class contactControler {
             res.render('admin', {
                 contacts: contacts,
                 title: "RefriExpert-Admin",
+                ogTitle: "Panel de administración - RefriExpert",
+                ogDescription: "Gestiona los contactos y pagos de RefriExpert.",
+                ogType: "website",
+                ogUrl: "http://localhost:10000/admin",
+                ogImage: "http://localhost:10000/img/og-admin.jpg",
                 isLoggedIn: !!req.session.userId, 
                 isAdmin: req.session.isAdmin      
             });
@@ -125,7 +132,7 @@ export class contactControler {
 
     static async clearContacts(req: Request, res: Response) {
         try {
-            await ContactsModel.clearAll();
+            await ContactsModel.clearContacts();
             res.redirect('/admin');
         } catch (error) {
             console.error('Error al limpiar la base de datos:', error);
@@ -133,11 +140,20 @@ export class contactControler {
         }
     }
 
+    static async clearPagos(req: Request, res: Response) {
+        try {
+            await ContactsModel.clearPagos();
+            res.redirect('/pagos');
+        } catch (error) {
+            console.error('Error al limpiar los pagos:', error);
+            res.status(500).render('500', { title: 'Error del servidor' });
+        }
+    }
+
     static async processPayment(req: Request, res: Response) {
         try {
-            let { cardNumber, cardHolder, expiryYear, expiryMonth, cvv, amount, currency } = req.body;
+            let { cardNumber, cardHolder, expiryYear, expiryMonth, cvv, amount, currency, service } = req.body;
             cardNumber = String(cardNumber).replace(/\s+/g, '');
-            const description = 'service';
             const reference = '011';
 
             const response = await fetch('https://fakepayment.onrender.com/payments', {
@@ -151,7 +167,7 @@ export class contactControler {
                     "expiration-year": expiryYear,
                     "full-name": cardHolder,
                     currency: String(currency),
-                    description,
+                    description: service,
                     reference
                 }, null, 2)
             });
@@ -163,6 +179,8 @@ export class contactControler {
             let result;
             try {
                 result = JSON.parse(text);
+                ContactsModel.addPago(result.data.description, result.data.amount, result.data.date, result.success ? 'success' : 'error');
+                // console.log('Resultado del pago:', result);
             } catch (e) {
                 return res.render('payment', { title: "Pago", error: "La API de pago no respondió correctamente." });
             }
@@ -281,6 +299,46 @@ export class contactControler {
                 return res.status(500).send('Error del servidor');
             }
             res.redirect('/');
+        });
+    }
+
+    static async getPagos(req: Request, res: Response) {
+        try {
+            const pagos = await ContactsModel.getPagos();
+            res.render('pagos', {
+                pagos: pagos,
+                title: "RefriExpert-Pagos",
+                isAdmin: req.session.isAdmin
+            });
+        } catch (error) {
+            console.error('Error al obtener los pagos:', error);
+            res.status(500).send('Error al obtener los pagos');
+        }
+    }
+
+    static async getContact(req: Request, res: Response) {
+        res.render('contact', {
+            title: "Contáctanos - RefriExpert",
+            ogTitle: "Formulario de contacto - RefriExpert",
+            ogDescription: "Envíanos tu consulta o solicita tu presupuesto sin compromiso.",
+            ogType: "website",
+            ogUrl: "http://localhost:10000/contact",
+            ogImage: "http://localhost:10000/img/og-contact.jpg",
+            errors: [],
+            data: {},
+            isLoggedIn: !!req.session.userId,
+            isAdmin: req.session.isAdmin
+        });
+    }
+
+    static async pageNotFound(req: Request, res: Response) {
+        res.status(404).render('404', {
+            title: "404 - Página no encontrada",
+            ogTitle: "404 - Página no encontrada",
+            ogDescription: "La página que buscas no existe.",
+            ogType: "website",
+            ogUrl: "http://localhost:10000/404",
+            ogImage: "http://localhost:10000/img/og-default.jpg"
         });
     }
 }

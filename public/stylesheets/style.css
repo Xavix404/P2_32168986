@@ -463,6 +463,38 @@ nav li:first-child{
     border-bottom: #111621 solid 3px;
 }
 
+.filter-bar {
+    background: #002132;
+    color: #f3f3f3;
+    border-radius: 10px;
+    padding: 12px;
+    margin: 12px 0;
+    box-shadow: 0 2px 8px rgba(9, 132, 227, 0.07);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    align-items: center;
+    justify-content: center;
+}
+
+.filter-bar input,
+.filter-bar select {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    color: #111621;
+    background-color: #f3f3f3;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.filter-bar label { 
+    color: #f3f3f3;
+    font-weight: 500;
+    margin-right: 10px;
+}
+
+
 table, th, td {
     border: 2px solid #002132;
     border-collapse: collapse;
@@ -476,7 +508,7 @@ table, th, td {
     overflow: hidden;
 }
 
-.btn-danger{
+.btn-admin{
     background: #111621;
     color: #f3f3f3;
     padding: 1rem;
@@ -484,10 +516,9 @@ table, th, td {
     border: none;
     cursor: pointer;
     font-size: 1.2rem;
-    width: 100%;
 }
 
-.btn-danger:hover{
+.btn-admin:hover{
     background: #111621EE;
 }
 
@@ -503,6 +534,22 @@ table, th, td {
 }
 .btn-logout:hover {
     background: #FE2D48EE;
+}
+.admin-link{
+    cursor: pointer;
+    text-decoration: none;
+    background: #111621;
+    color: #e8fffc;
+    padding: 1rem;
+    margin-top: 1rem;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+}
+
+.admin-link:hover{
+    background: transparent;
+    border: #111621 solid 2px;
+    color: #111621;
 }
 
 /*payment*/

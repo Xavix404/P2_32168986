@@ -32,10 +32,15 @@ app.set('views', __dirname + '/views');
 
 // Configuración de la sesión
 app.use(session({
-    secret: 'clave_super_segura',
+    secret: process.env.SESSION_SECRET || 'tu_clave_secreta',
     resave: false,
     saveUninitialized: false,
-    cookie: { secure: false } // Usa true solo si usas HTTPS
+    cookie: {
+        httpOnly: true,
+        sameSite: 'lax', 
+        secure: process.env.NODE_ENV === 'production',
+        maxAge: 15 * 60 * 1000 // 15 minutos en milisegundos
+    }
 }));
 
 passport.use(new GoogleStrategy({
@@ -59,6 +64,14 @@ passport.deserializeUser((obj, done) => {
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+// Middleware para mantener la sesión activa
+app.use((req, res, next) => {
+    if (req.session) {
+        req.session.touch();
+    }
+    next();
+});
 
 // Usa el router principal
 app.use('/', router);

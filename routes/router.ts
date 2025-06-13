@@ -29,6 +29,8 @@ router.get('/admin', requireAdmin, contactControler.getContacts);
 router.post('/admin/clear', contactControler.clearContacts);
 router.get('/payment', contactControler.getPayment);
 router.post('/payment', contactControler.processPayment);
+router.get('/pagos', requireAdmin, contactControler.getPagos);
+router.post('/pagos/clear', contactControler.clearPagos);
 router.get('/register', requireAdmin, contactControler.getRegister);
 router.post('/register', requireAdmin, contactControler.registerUser);
 router.get('/login', contactControler.getLogin);
