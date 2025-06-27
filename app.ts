@@ -7,6 +7,8 @@ import dotenv from 'dotenv';
 import session from 'express-session';
 import passport from 'passport';
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
+import cookieParser from 'cookie-parser';
+import { i18nMiddleware } from './middleware/i18n';
 
 dotenv.config();
 
@@ -22,15 +24,9 @@ app.disable('x-powered-by');
 app.use(bodyParser.json());
 // Middleware para parsear datos de formularios (urlencoded)
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
 
-// Sirve archivos estáticos desde la carpeta 'public'
-app.use(express.static(__dirname + "/public"));
-
-// Configura EJS como motor de plantillas
-app.set('view engine', 'ejs');
-app.set('views', __dirname + '/views');
-
-// Configuración de la sesión
+// Mueve la configuración de sesión ANTES del i18nMiddleware
 app.use(session({
     secret: process.env.SESSION_SECRET || 'tu_clave_secreta',
     resave: false,
@@ -42,6 +38,15 @@ app.use(session({
         maxAge: 15 * 60 * 1000 // 15 minutos en milisegundos
     }
 }));
+
+app.use(i18nMiddleware);
+
+// Sirve archivos estáticos desde la carpeta 'public'
+app.use(express.static(__dirname + "/public"));
+
+// Configura EJS como motor de plantillas
+app.set('view engine', 'ejs');
+app.set('views', __dirname + '/views');
 
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID!,
@@ -84,7 +89,9 @@ app.use((_req, res) => {
 // Middleware global de manejo de errores
 app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
     console.error(err.stack);
-    res.status(500).render('500', { title: 'Error del servidor' });
+    const lang = res.locals.lang || 'es';
+    const t = res.locals.t || ((key: string) => key);
+    res.status(500).render('500', { title: 'Error del servidor', lang, t });
 });
 
 // Función principal para iniciar el servidor y la base de datos

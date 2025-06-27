@@ -1,96 +1,76 @@
 <%- include('template/cabecera.ejs') %>
-    <main>
-        <div class="adminPanel">
-            <h2 class="adminTitle">Contactos</h2>
+<main>
+    <div class="adminPanel">
+        <h2 class="adminTitle"><%= t('contacts') %></h2>
 
-            <div class="filter-bar">
-                <label>
-                    Nombre:
-                    <input type="text" id="filtroNombre" placeholder="Buscar por nombre">
-                </label>
-                <label>
-                    Email:
-                    <input type="text" id="filtroEmail" placeholder="Buscar por email">
-                </label>
-                <label>
-                    Fecha:
-                    <input type="date" id="filtroFecha">
-                </label>
-                <button onclick="filtrarContactos()">Buscar</button>
-            </div>
-
-            <table class="adminTable">
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Email</th>
-                    <th>Telefono</th>
-                    <th>Mensaje</th>
-                    <th>Ip</th>
-                    <th>Fecha</th>
-                    <th>Pais</th>
-                    <th>Ciudad</th>
-                
-                    <% contacts.forEach(element => { %>
-                    <tr>
-                        <td>
-                            <p><%= element.ID %></p>
-                        </td>
-                        <td>
-                            <p><%= element.name %></p>
-                        </td>
-                        <td>
-                            <p><%= element.email %></p>
-                        </td>
-                        <td>
-                            <p><%= element.phone %></p>
-                        </td>
-                        <td>
-                            <p><%= element.message %></p>
-                        </td>
-                        <td>
-                            <p><%= element.ip %></p>
-                        </td>
-                        <td>
-                            <p><%= element.date %></p>
-                        </td>
-                        <td>
-                            <p><%= element.country %></p>
-                        </td>
-                        <td>
-                            <p><%= element.city %></p>
-                        </td>
-                    </tr>
-                    <% }) %>
-                
-            </table>
-
-            <form action="/admin/clear" method="post" onsubmit="return confirm('¿Estás seguro de que deseas borrar todos los contactos?');">
-                <button type="submit" class="btn-admin">Limpiar base de datos</button>
-            </form>
-
-            <a class="admin-link" href="/pagos">Pagos</a>
+        <div class="filter-bar">
+            <label>
+                <%= t('name') %>:
+                <input type="text" id="filtroNombre" placeholder="<%= t('search_by_name') %>">
+            </label>
+            <label>
+                Email:
+                <input type="text" id="filtroEmail" placeholder="<%= t('search_by_email') %>">
+            </label>
+            <label>
+                <%= t('date') %>:
+                <input type="date" id="filtroFecha">
+            </label>
+            <button onclick="filtrarContactos()"><%= t('search') %></button>
         </div>
 
-        <div style="margin-bottom: 20px;">
-            <a href="/register" class="btn-admin-register">Registrar nuevo administrador</a>
-        </div>
-    </main>
-    <script>
-    function filtrarContactos() {
-        const nombre = document.getElementById('filtroNombre').value.toLowerCase();
-        const email = document.getElementById('filtroEmail').value.toLowerCase();
-        const fecha = document.getElementById('filtroFecha').value;
-        const filas = document.querySelectorAll('.adminTable tbody tr');
-        filas.forEach(fila => {
-            const tdNombre = fila.children[1].textContent.toLowerCase();
-            const tdEmail = fila.children[2].textContent.toLowerCase();
-            const tdFecha = fila.children[6].textContent; // Ajusta el índice según tu tabla
-            let mostrar = true;
-            if (nombre && !tdNombre.includes(nombre)) mostrar = false;
-            if (email && !tdEmail.includes(email)) mostrar = false;
-            if (fecha && tdFecha !== fecha) mostrar = false;
-            fila.style.display = mostrar ? '' : 'none';
-        });
-    }
-    </script>
+        <table class="adminTable">
+            <th>ID</th>
+            <th><%= t('name') %></th>
+            <th>Email</th>
+            <th><%= t('phone') %></th>
+            <th><%= t('message') %></th>
+            <th>Ip</th>
+            <th><%= t('date') %></th>
+            <th><%= t('country') %></th>
+            <th><%= t('city') %></th>
+            <% contacts.forEach(element => { %>
+            <tr>
+                <td><p><%= element.ID %></p></td>
+                <td><p><%= element.name %></p></td>
+                <td><p><%= element.email %></p></td>
+                <td><p><%= element.phone %></p></td>
+                <td><p><%= element.message %></p></td>
+                <td><p><%= element.ip %></p></td>
+                <td><p><%= element.date %></p></td>
+                <td><p><%= element.country %></p></td>
+                <td><p><%= element.city %></p></td>
+            </tr>
+            <% }) %>
+        </table>
+
+        <form action="/admin/clear" method="post" onsubmit="return confirm(`<%= t('confirm_clear_contacts') %>`);">
+            <button type="submit" class="btn-admin"><%= t('clear_database') %></button>
+        </form>
+
+        <a class="admin-link" href="/pagos"><%= t('payments') %></a>
+    </div>
+
+    <div style="margin-bottom: 20px;">
+        <a href="/register" class="btn-admin-register"><%= t('register_new_admin') %></a>
+    </div>
+</main>
+<script>
+function filtrarContactos() {
+    const nombre = document.getElementById('filtroNombre').value.toLowerCase();
+    const email = document.getElementById('filtroEmail').value.toLowerCase();
+    const fecha = document.getElementById('filtroFecha').value;
+    const filas = document.querySelectorAll('.adminTable tbody tr');
+    filas.forEach(fila => {
+        const tdNombre = fila.children[1].textContent.toLowerCase();
+        const tdEmail = fila.children[2].textContent.toLowerCase();
+        const tdFecha = fila.children[6].textContent;
+        let mostrar = true;
+        if (nombre && !tdNombre.includes(nombre)) mostrar = false;
+        if (email && !tdEmail.includes(email)) mostrar = false;
+        if (fecha && tdFecha !== fecha) mostrar = false;
+        fila.style.display = mostrar ? '' : 'none';
+    });
+}
+</script>
 <%- include('template/footer.ejs') %>

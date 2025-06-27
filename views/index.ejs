@@ -3,24 +3,22 @@
     <main>
         <section class="home">
             
-            <h1> RefriExpert </h1>
-            <p>Frescura y confort, 
-            <br>en manos expertas!</p>
-
-            <a href="#contact">contactanos</a>
+            <h1>RefriExpert</h1>
+            <p><%= t('slogan') %></p>
+            <a href="#contact"><%= t('contact_us') %></a>
         </section>
 
         <section class="advantagesAndBenefits">
 
             <div class="gridAAB">
                 <div class="containerAAB">
-                    <h2>Ventajas y Beneficios</h2>
+                    <h2><%= t('advantages_benefits') %></h2>
                     <ol>
-                        <li>Servicio rápido y eficiente para maximizar el rendimiento de tu aire acondicionado.</li>
-                        <li>Diagnósticos precisos realizados por técnicos especializados.</li>
-                        <li>Precios competitivos adaptados a tus necesidades.</li>
-                        <li>Prolonga la vida útil de tus equipos con mantenimiento profesional.</li>
-                        <li>Garantía de satisfacción en cada reparación realizada.</li>
+                        <li><%= t('advantage_1') %></li>
+                        <li><%= t('advantage_2') %></li>
+                        <li><%= t('advantage_3') %></li>
+                        <li><%= t('advantage_4') %></li>
+                        <li><%= t('advantage_5') %></li>
                     </ol>
                 </div>
 
@@ -32,41 +30,41 @@
             <div class="gridAbout">
                 <div class="aboutImage"></div>
                 <div class="aboutContent">
-                    <h2>Sobre mi</h2>
-                    <p> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellat pariatur labore iusto nam similique laboriosam, voluptas ad quia atque rem nemo quo fuga officia dignissimos itaque neque sunt enim? Nam.Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellat pariatur labore iusto nam similique laboriosam, voluptas ad quia atque rem nemo quo fuga officia dignissimos itaque neque sunt enim? Nam.</p>
+                    <h2><%= t('about_me') %></h2>
+                    <p><%= t('about_me_text') %></p>
                 </div>
             </div>
         </section>
 
         <section class="services" id="services">
 
-            <h2>Servicios</h2>
+            <h2><%= t('services') %></h2>
 
             <div class="servicesGrid">
                 
                 <article>
-                    <img loading="lazy" height="200" width="300" src="./images/img4.jpg" alt="aire acondicionado instalado">
-                    <h3>Instalacion de aires acondicionados</h3>
-                    <p> incluye la evaluación previa del espacio para determinar la ubicación más eficiente del equipo, la correcta fijación de las unidades interiores y exteriores, y la conexión de los sistemas eléctricos y de refrigeración según las normativas. </p>
+                    <img loading="lazy" height="200" width="300" src="./images/img4.jpg" alt="<%= t('service_install_alt') %>">
+                    <h3><%= t('service_install') %></h3>
+                    <p><%= t('service_install_desc') %></p>
                 </article>
             
                 <article>
-                    <img loading="lazy" height="200" width="300" src="./images/img6.jpg" alt="diagnostico de aire acondicionado">
-                    <h3>Diagnostico</h3>
-                    <p> Un servicio de diagnóstico de aire acondicionado incluye la inspección detallada del equipo para identificar posibles fallas o problemas en su funcionamiento. Esto abarca la revisión del sistema eléctrico, el circuito de refrigeración, los filtros y las unidades internas y externas.</p>
+                    <img loading="lazy" height="200" width="300" src="./images/img6.jpg" alt="<%= t('service_diagnosis_alt') %>">
+                    <h3><%= t('service_diagnosis') %></h3>
+                    <p><%= t('service_diagnosis_desc') %></p>
                 </article>
             
                 <article>
-                    <img loading="lazy" height="200" width="300" src="./images/img7.jpg" alt="reparación de aire acondicionado">
-                    <h3>Reparacion</h3>
-                    <p> Un servicio de reparación de aire acondicionado incluye la identificación y solución de fallas en el sistema, ya sea en componentes eléctricos, mecánicos o del circuito de refrigeración.</p> <!--Esto abarca la reparación de fugas de gas refrigerante, sustitución de piezas dañadas, limpieza de filtros obstruidos y ajustes necesarios para garantizar un funcionamiento eficiente.-->
+                    <img loading="lazy" height="200" width="300" src="./images/img7.jpg" alt="<%= t('service_repair_alt') %>">
+                    <h3><%= t('service_repair') %></h3>
+                    <p><%= t('service_repair_desc') %></p>
                 </article>
                 
             </div>
 
             <div style="text-align:center; margin: 2em 0;">
                 <a href="/payment" class="btn-payment" style="padding: 0.7em 2em; font-size: 1.1em; background: #007bff; color: #fff; border-radius: 5px; text-decoration: none;">
-                    Ir a pago de servicios
+                    <%= t('go_to_payment') %>
                 </a>
             </div>
 
@@ -77,17 +75,21 @@
                 <div class="testimonialsImage"></div>
                 <div class="testimonialsContent">
                     <div class="testimonialIcon">
-                        <svg xmlns="http://www.w3.org/2000/svg" height="50px" viewBox="http://www.w3.org/2000/svg" width="50px" fill="#f3f3f3"><path d="m363-390 117-71 117 71-31-133 104-90-137-11-53-126-53 126-137 11 104 90-31 133ZM80-80v-720q0-33 23.5-56.5T160-880h640q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H240L80-80Zm126-240h594v-480H160v525l46-45Zm-46 0v-480 480Z"/></svg>
+                        <svg  xmlns="http://www.w3.org/2000/svg"  width="48"  height="48"  viewBox="0 0 24 24"  fill="#f3f3f3"  class="icon icon-tabler icons-tabler-filled icon-tabler-user"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 2a5 5 0 1 1 -5 5l.005 -.217a5 5 0 0 1 4.995 -4.783z" /><path d="M14 14a5 5 0 0 1 5 5v1a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-1a5 5 0 0 1 5 -5h4z" /></svg>
                     </div>
-                    <h2>Testimonio</h2>
-                    <p>"No puedo estar más satisfecho con el servicio de instalación de aire acondicionado. Desde el primer contacto, el equipo fue increíblemente profesional y atento a mis necesidades. El proceso de instalación fue rápido y eficiente, y se aseguraron de dejar todo impecable al finalizar. Mi casa ahora está perfectamente climatizada, y la calidad del trabajo realmente supera mis expectativas. ¡100% recomendado!"</p>
-                    <div class="testimonialAutor">Andrés Pérez</div>
+                    <h2><%= t('testimonial') %></h2>
+                    <p><%= t('testimonial_text') %></p>
+                    <div class="testimonialAutor"><%= t('testimonial_author') %></div>
                     <div class="stars">
-                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="http://www.w3.org/2000/svg" width="24px" fill="#ffbf00"><path d="m354-287 126-76 126 77-33-144 111-96-146-13-58-136-58 135-146 13 111 97-33 143ZM233-120l65-281L80-590l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Zm247-350Z"/></svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="http://www.w3.org/2000/svg" width="24px" fill="#ffbf00"><path d="m354-287 126-76 126 77-33-144 111-96-146-13-58-136-58 135-146 13 111 97-33 143ZM233-120l65-281L80-590l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Zm247-350Z"/></svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="http://www.w3.org/2000/svg" width="24px" fill="#ffbf00"><path d="m354-287 126-76 126 77-33-144 111-96-146-13-58-136-58 135-146 13 111 97-33 143ZM233-120l65-281L80-590l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Zm247-350Z"/></svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="http://www.w3.org/2000/svg" width="24px" fill="#ffbf00"><path d="m354-287 126-76 126 77-33-144 111-96-146-13-58-136-58 135-146 13 111 97-33 143ZM233-120l65-281L80-590l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Zm247-350Z"/></svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="http://www.w3.org/2000/svg" width="24px" fill="#ffbf00"><path d="m354-287 126-76 126 77-33-144 111-96-146-13-58-136-58 135-146 13 111 97-33 143ZM233-120l65-281L80-590l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Zm247-350Z"/></svg>
+                        <svg width="120" height="24" viewBox="0 0 120 24" fill="none">
+                            <g>
+                                <polygon points="12,2 15,9 22,9 16,14 18,21 12,17 6,21 8,14 2,9 9,9" fill="#FFD700"/>
+                                <polygon points="36,2 39,9 46,9 40,14 42,21 36,17 30,21 32,14 26,9 33,9" fill="#FFD700"/>
+                                <polygon points="60,2 63,9 70,9 64,14 66,21 60,17 54,21 56,14 50,9 57,9" fill="#FFD700"/>
+                                <polygon points="84,2 87,9 94,9 88,14 90,21 84,17 78,21 80,14 74,9 81,9" fill="#FFD700"/>
+                                <polygon points="108,2 111,9 118,9 112,14 114,21 108,17 102,21 104,14 98,9 105,9" fill="#FFD700"/>
+                            </g>
+                        </svg>
                     </div>
                 </div>
             </div>
@@ -95,31 +97,53 @@
 
         <section class="contact" id="contact">
 
-            <h2>Contactanos</h2>
+            <h2><%= t('contact_us') %></h2>
 
             <div class="gridContact">
 
                 <div class="contactInfo">
 
                     <div class="direction">
-                        <p>Av. Bolívar Norte, esquina con Calle El Sol,</p>
-                        <p>Cagua, Estado Aragua, Venezuela.</p>
+                        <p><%= t('address_line1') %></p>
+                        <p><%= t('address_line2') %></p>
                     </div>
                     
-                    <div class="link"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="http://www.w3.org/2000/svg" width="24px" fill="#002132"><path d="M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm320-280L160-640v400h640v-400L480-440Zm0-80 320-200H160l320 200ZM160-640v-80 480-400Z"/></svg><strong>Email:</strong> <a href="mailto:contacto@refriexpert.com">contacto@refriexpert.com</a></div>
+                    <div class="link">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-mail">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                            <path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" />
+                            <path d="M3 7l9 6l9 -6" />
+                        </svg>
+                        <strong><%= t('email') %>:</strong>
+                        <a href="mailto:contacto@refriexpert.com">contacto@refriexpert.com</a>
+                    </div>
 
-                    <div class="link"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="http://www.w3.org/2000/svg" width="24px" fill="#002132"><path d="M798-120q-125 0-247-54.5T329-329Q229-429 174.5-551T120-798q0-18 12-30t30-12h162q14 0 25 9.5t13 22.5l26 140q2 16-1 27t-11 19l-97 98q20 37 47.5 71.5T387-386q31 31 65 57.5t72 48.5l94-94q9-9 23.5-13.5T670-390l138 28q14 4 23 14.5t9 23.5v162q0 18-12 30t-30 12ZM241-600l66-66-17-94h-89q5 41 14 81t26 79Zm358 358q39 17 79.5 27t81.5 13v-88l-94-19-67 67ZM241-600Zm358 358Z"/></svg><strong>Teléfono:</strong> <a href="tel:+58 416-555-1234">+58 416-555-1234</a></div>
+                    <div class="link">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-phone">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                            <path d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2" />
+                        </svg>
+                        <strong><%= t('phone') %>:</strong>
+                        <a href="tel:+58 416-555-1234">+58 416-555-1234</a>
+                    </div>
 
-                    <div class="link"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="http://www.w3.org/2000/svg" width="24px" fill="#002132"><path d="m612-292 56-56-148-148v-184h-80v216l172 172ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-400Zm0 320q133 0 226.5-93.5T800-480q0-133-93.5-226.5T480-800q-133 0-226.5 93.5T160-480q0 133 93.5 226.5T480-160Z"/></svg><strong>Horario:</strong> Lunes - Viernes 8:00 - 19:00</div>
-                    
-
+                    <div class="link">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-calendar-check">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                            <path d="M11.5 21h-5.5a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v6" />
+                            <path d="M16 3v4" />
+                            <path d="M8 3v4" />
+                            <path d="M4 11h16" />
+                            <path d="M15 19l2 2l4 -4" />
+                        </svg>
+                        <strong><%= t('schedule') %>:</strong>
+                        <%= t('schedule_text') %>
+                    </div>
                 </div>
 
                 <div class="contactForm">
                     <form id="form" action="/send#contact" method="post">
-                        
-                        <input class="campo<% if (errors && errors.some(e => e.path === 'name')) { %> input-error<% } %>" type="text" id="name" name="name" placeholder="Nombre" value="<%= data.name || '' %>">
-                        
+                        <input class="campo<% if (errors && errors.some(e => e.path === 'name')) { %> input-error<% } %>" type="text" id="name" name="name" placeholder="<%= t('name') %>" value="<%= data.name || '' %>">
                         <% if (errors) {%>
                             <% errors.forEach(error => { %>
                                 <% if (error.path == 'name') { %>
@@ -127,7 +151,8 @@
                                 <% } %>
                             <% }); %>
                         <% } %>
-                        <input class="campo<% if (errors && errors.some(e => e.path === 'email')) { %> input-error<% } %>" type="email" id="email" name="email" placeholder="Correo" value="<%= data.email || '' %>">
+
+                        <input class="campo<% if (errors && errors.some(e => e.path === 'email')) { %> input-error<% } %>" type="email" id="email" name="email" placeholder="<%= t('email') %>" value="<%= data.email || '' %>">
                         <% if (errors) {%>
                             <% errors.forEach(error => { %>
                                 <% if (error.path == 'email') { %>
@@ -136,7 +161,7 @@
                             <% }); %>
                         <% } %>
 
-                        <input class="campo<% if (errors && errors.some(e => e.path === 'phone')) { %> input-error<% } %>" type="tel" id="phone" name="phone" placeholder="Teléfono" value="<%= data.phone || '' %>">
+                        <input class="campo<% if (errors && errors.some(e => e.path === 'phone')) { %> input-error<% } %>" type="tel" id="phone" name="phone" placeholder="<%= t('phone') %>" value="<%= data.phone || '' %>">
                         <% if (errors) {%>
                             <% errors.forEach(error => { %>
                                 <% if (error.path == 'phone') { %>
@@ -145,7 +170,7 @@
                             <% }); %>
                         <% } %>
 
-                        <textarea class="campo<% if (errors && errors.some(e => e.path === 'message')) { %> input-error<% } %>" name="message" id="message" placeholder="Mensaje"><%= data.message || '' %></textarea>
+                        <textarea class="campo<% if (errors && errors.some(e => e.path === 'message')) { %> input-error<% } %>" name="message" id="message" placeholder="<%= t('message') %>"><%= data.message || '' %></textarea>
                         <% if (errors) {%>
                             <% errors.forEach(error => { %>
                                 <% if (error.path == 'message') { %>
@@ -164,7 +189,7 @@
                             <% }); %>
                         <% } %>
 
-                        <button type="submit">Enviar</button>
+                        <button type="submit"><%= t('send') %></button>
                     </form>
                     <script>
                     document.getElementById('form').addEventListener('submit', function() {

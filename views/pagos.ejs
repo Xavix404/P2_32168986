@@ -1,79 +1,74 @@
 <%- include('template/cabecera.ejs') %>
-    <main>
-        <div class="adminPanel">
-            <h2 class="adminTitle">Pagos</h2>
-            <div class="filter-bar">
-                <label>Desde: <input type="date" id="fechaDesde"></label>
-                <label>Hasta: <input type="date" id="fechaHasta"></label>
-                <label>Servicio:
-                    <select id="servicioFiltro">
-                        <option value="">Todos</option>
-                        <% [...new Set(pagos.map(p => p.servicio))].forEach(servicio => { %>
-                            <option value="<%= servicio %>"><%= servicio %></option>
-                        <% }) %>
-                    </select>
-                </label>
-                <label>Estado:
-                    <select id="estadoFiltro">
-                        <option value="">Todos</option>
-                        <% [...new Set(pagos.map(p => p.estado))].forEach(estado => { %>
-                            <option value="<%= estado %>"><%= estado %></option>
-                        <% }) %>
-                    </select>
-                </label>
-                <button class="btn-admin" onclick="filtrarPagos()">Buscar</button>
-            </div>
-            <table class="adminTable">
-                    <th>ID</th>
-                    <th>Servicio</th>
-                    <th>Monto</th>
-                    <th>Fecha</th>
-                    <th>Estado</th>
-                
-                    <% pagos.forEach(element => { %>
-                    <tr>
-                        <td>
-                            <p><%= element.id %></p>
-                        </td>
-                        <td>
-                            <p><%= element.servicio %></p>
-                        </td>
-                        <td>
-                            <p><%= element.monto %></p>
-                        </td>
-                        <td>
-                            <p><%= element.fecha %></p>
-                        </td>
-                        <td>
-                            <p><%= element.estado %></p>
-                        </td>
-                    </tr>
+<main>
+    <div class="adminPanel">
+        <h2 class="adminTitle"><%= t('payments') %></h2>
+        <div class="filter-bar">
+            <label><%= t('from') %>: <input type="date" id="fechaDesde"></label>
+            <label><%= t('to') %>: <input type="date" id="fechaHasta"></label>
+            <label><%= t('service') %>:
+                <select id="servicioFiltro">
+                    <option value=""><?= t('all') ?></option>
+                    <% [...new Set(pagos.map(p => p.servicio))].forEach(servicio => { %>
+                        <option value="<%= servicio %>"><%= servicio %></option>
                     <% }) %>
-            </table>
-
-            <form action="/pagos/clear" method="post" onsubmit="return confirm('¿Estás seguro de que deseas borrar todos los pagos?');">
-                <button type="submit" class="btn-admin">Limpiar base de datos</button>
-            </form>
-
-            <a class="admin-link" href="/admin">Contactos</a>
+                </select>
+            </label>
+            <label><%= t('status') %>:
+                <select id="estadoFiltro">
+                    <option value=""><?= t('all') ?></option>
+                    <% [...new Set(pagos.map(p => p.estado))].forEach(estado => { %>
+                        <option value="<%= estado %>"><%= estado %></option>
+                    <% }) %>
+                </select>
+            </label>
+            <button class="btn-admin" onclick="filtrarPagos()"><%= t('search') %></button>
         </div>
-    </main>
-    <script>
-        function filtrarPagos() {
-            const desde = document.getElementById('fechaDesde').value;
-            const hasta = document.getElementById('fechaHasta').value;
-            const servicio = document.getElementById('servicioFiltro').value;
-            const estado = document.getElementById('estadoFiltro').value;
-            const filas = document.querySelectorAll('#tablaPagos tbody tr');
-            filas.forEach(fila => {
-                const [tdServicio, , tdFecha, tdEstado] = fila.children;
-                let mostrar = true;
-                if (servicio && tdServicio.textContent !== servicio) mostrar = false;
-                if (estado && tdEstado.textContent !== estado) mostrar = false;
-                if (desde && tdFecha.textContent < desde) mostrar = false;
-                if (hasta && tdFecha.textContent > hasta) mostrar = false;
-                fila.style.display = mostrar ? '' : 'none';
-            });
-        }
-    </script>
+        <table class="adminTable" id="tablaPagos">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th><%= t('service') %></th>
+                    <th><%= t('amount') %></th>
+                    <th><%= t('date') %></th>
+                    <th><%= t('status') %></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% pagos.forEach(element => { %>
+                <tr>
+                    <td><p><%= element.id %></p></td>
+                    <td><p><%= element.servicio %></p></td>
+                    <td><p><%= formatCurrency(element.monto, element.moneda || 'VES') %></p></td>
+                    <td><p><%= formatDate(element.fecha) %></p></td>
+                    <td><p><%= element.estado %></p></td>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+
+        <form action="/pagos/clear" method="post" onsubmit="return confirm(`<%= t('confirm_clear_payments') %>`);">
+            <button type="submit" class="btn-admin"><%= t('clear_database') %></button>
+        </form>
+
+        <a class="admin-link" href="/admin"><%= t('contacts') %></a>
+    </div>
+</main>
+<script>
+    function filtrarPagos() {
+        const desde = document.getElementById('fechaDesde').value;
+        const hasta = document.getElementById('fechaHasta').value;
+        const servicio = document.getElementById('servicioFiltro').value;
+        const estado = document.getElementById('estadoFiltro').value;
+        const filas = document.querySelectorAll('#tablaPagos tbody tr');
+        filas.forEach(fila => {
+            const [tdServicio, , tdFecha, tdEstado] = fila.children;
+            let mostrar = true;
+            if (servicio && tdServicio.textContent !== servicio) mostrar = false;
+            if (estado && tdEstado.textContent !== estado) mostrar = false;
+            if (desde && tdFecha.textContent < desde) mostrar = false;
+            if (hasta && tdFecha.textContent > hasta) mostrar = false;
+            fila.style.display = mostrar ? '' : 'none';
+        });
+    }
+</script>
 <%- include('template/footer.ejs') %>

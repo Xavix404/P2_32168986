@@ -1,4 +1,4 @@
-        <footer class="footer">
+<footer class="footer">
             <ul class="socialIcon">
                 <li><a href="">
                     <ion-icon name="logo-youtube"></ion-icon></a>
@@ -13,7 +13,13 @@
                     <ion-icon name="logo-facebook"></ion-icon></a>
                 </li>
             </ul>
-            <p>© 2025 | todos los derechos reservados</p>
+            <p>© 2025 | <%= t('all_rights_reserved') || 'todos los derechos reservados' %></p>
+            <form method="get" action="" style="display:inline;">
+                <select name="lang" onchange="this.form.submit()" style="margin-left:1em;">
+                    <option value="es" <%= lang === 'es' ? 'selected' : '' %>><%= t('spanish') %></option>
+                    <option value="en" <%= lang === 'en' ? 'selected' : '' %>><%= t('english') %></option>
+                </select>
+            </form>
         </footer>
     </div>
 

@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="<%= lang %>">
+<head>
+    <meta charset="UTF-8">
+    <title>500 - <%= t('server_error') || 'Error del servidor' %></title>
+</head>
+<body>
+    <h1>500 - <%= t('server_error') || 'Error del servidor' %></h1>
+    <p><%= t('internal_error_message') || 'Ha ocurrido un error inesperado en el servidor.' %></p>
+    <a href="/"><%= t('home') %></a>
+</body>
+</html>
