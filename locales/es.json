@@ -81,5 +81,15 @@
   "year": "Año",
   "pay": "Pagar",
   "register_title": "Registro de Usuario",
-  "already_have_account": "¿Ya tienes cuenta?"
+  "already_have_account": "¿Ya tienes cuenta?",
+  "error_invalid_name": "El nombre es inválido",
+  "error_email_required": "El email es obligatorio",
+  "error_invalid_phone": "El número de teléfono no es válido",
+  "error_message_required": "El mensaje es obligatorio",
+  "error_message_length": "El mensaje debe tener máximo 200 caracteres",
+  "error_user_exists": "El usuario ya existe.",
+  "error_register": "Error en el registro.",
+  "error_invalid_login": "Usuario o contraseña incorrectos.",
+  "error_payment_api": "La API de pago no respondió correctamente.",
+  "error_payment_process": "Error procesando el pago."
 }

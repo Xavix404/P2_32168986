@@ -16,18 +16,18 @@ export class contactControler {
     static validateData = [
         check('name')
             .matches(/^[a-zA-ZÀ-ÿ\s]{1,40}$/)
-            .withMessage('El nombre es inválido'),
+            .withMessage('error_invalid_name'),
         check('email')
             .isEmail()
-            .withMessage('El email es obligatorio'),
+            .withMessage('error_email_required'),
         check('phone')
             .matches(/^0?(412|414|416|424|426)-?\d{7}$/)
-            .withMessage('El número de teléfono no es válido'),
+            .withMessage('error_invalid_phone'),
         check('message')
             .notEmpty()
-            .withMessage('El mensaje es obligatorio')
+            .withMessage('error_message_required')
             .isLength({ max: 200 })
-            .withMessage('El mensaje debe tener máximo 200 caracteres')
+            .withMessage('error_message_length')
     ];
 
     // Renderiza la página principal
@@ -49,12 +49,17 @@ export class contactControler {
     // Procesa el envío del formulario
     static async add(req: Request, res: Response) {
         try {
-            // Validaciones y obtención de datos
             const errors = validationResult(req);
             if (!errors.isEmpty()) {
+                // Traduce los mensajes de error usando la función t
+                const t = res.locals.t || ((key: string) => key);
+                const translatedErrors = errors.array().map(error => ({
+                    ...error,
+                    msg: t(error.msg)
+                }));
                 return res.render('index', {
                     title: "RefriExpert",
-                    errors: errors.array(),
+                    errors: translatedErrors,
                     data: req.body,
                     isLoggedIn: !!req.session.userId,
                     isAdmin: req.session.isAdmin
@@ -182,7 +187,8 @@ export class contactControler {
                 ContactsModel.addPago(result.data.description, result.data.amount, result.data.date, result.success ? 'success' : 'error');
                 // console.log('Resultado del pago:', result);
             } catch (e) {
-                return res.render('payment', { title: "Pago", error: "La API de pago no respondió correctamente." });
+                const t = res.locals.t || ((key: string) => key);
+                return res.render('payment', { title: "Pago", error: t('error_payment_api') });
             }
 
             if (result.success) {
@@ -192,7 +198,8 @@ export class contactControler {
             }
         } catch (error) {
             console.log('Error en el pago:', error);
-            return res.render('payment', { title: "Pago", error: "Error procesando el pago." });
+            const t = res.locals.t || ((key: string) => key);
+            return res.render('payment', { title: "Pago", error: t('error_payment_process') });
         }
     }
 
@@ -253,9 +260,11 @@ export class contactControler {
             res.redirect('/admin');
         } catch (error: any) {
             if (error.code === 'SQLITE_CONSTRAINT') {
-                res.status(400).render('register', { error: 'El usuario ya existe.' });
+                const t = res.locals.t || ((key: string) => key);
+                res.status(400).render('register', { error: t('error_user_exists') });
             } else {
-                res.status(400).render('register', { error: 'Error en el registro.' });
+                const t = res.locals.t || ((key: string) => key);
+                res.status(400).render('register', { error: t('error_register') });
             }
         }
     }
@@ -271,12 +280,13 @@ export class contactControler {
         const { username, password } = req.body;
         try {
             const user = await ContactsModel.findByUsername(username);
+            const t = res.locals.t || ((key: string) => key);
             if (!user) {
-                return res.status(401).render('login', { error: 'Usuario o contraseña incorrectos.' });
+                return res.status(401).render('login', { error: t('error_invalid_login') });
             }
             const isMatch = await ContactsModel.comparePassword(password, user.password_hash);
             if (!isMatch) {
-                return res.status(401).render('login', { error: 'Usuario o contraseña incorrectos.' });
+                return res.status(401).render('login', { error: t('error_invalid_login') });
             }
             req.session.userId = user.id;
             req.session.username = user.username;

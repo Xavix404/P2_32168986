@@ -81,5 +81,15 @@
   "year": "Year",
   "pay": "Pay",
   "register_title": "User Registration",
-  "already_have_account": "Already have an account?"
+  "already_have_account": "Already have an account?",
+  "error_invalid_name": "The name is invalid",
+  "error_email_required": "Email is required",
+  "error_invalid_phone": "The phone number is invalid",
+  "error_message_required": "Message is required",
+  "error_message_length": "The message must be at most 200 characters",
+  "error_user_exists": "User already exists.",
+  "error_register": "Registration error.",
+  "error_invalid_login": "Incorrect username or password.",
+  "error_payment_api": "The payment API did not respond correctly.",
+  "error_payment_process": "Error processing payment."
 }

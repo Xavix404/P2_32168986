@@ -14,10 +14,10 @@
                 </li>
             </ul>
             <p>© 2025 | <%= t('all_rights_reserved') || 'todos los derechos reservados' %></p>
-            <form method="get" action="" style="display:inline;">
-                <select name="lang" onchange="this.form.submit()" style="margin-left:1em;">
-                    <option value="es" <%= lang === 'es' ? 'selected' : '' %>><%= t('spanish') %></option>
-                    <option value="en" <%= lang === 'en' ? 'selected' : '' %>><%= t('english') %></option>
+            <form method="get" action="" class="lang-form">
+                <select name="lang" onchange="this.form.submit()" class="lang-select">
+                    <option value="es" <%= lang === 'es' ? 'selected' : '' %>>🇻🇪 <%= t('spanish') %></option>
+                    <option value="en" <%= lang === 'en' ? 'selected' : '' %>>🇺🇸 <%= t('english') %></option>
                 </select>
             </form>
         </footer>
