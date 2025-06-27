@@ -48,17 +48,28 @@
                 <div class="card_grp space">
                     <div class="space iconRelative">
                         <label for="amount"><%= t('amount') %></label>
-                        <input type="text" id="amount" class="input cardItem" name="amount_display" value="1000" readonly>
+                        <input
+                            readonly
+                            type="text"
+                            id="amount"
+                            name="amount_display"
+                            class="input"
+                            value="<%= formatCurrency(1000, lang === 'es' ? 'VBS' : 'USD') %>"
+                            tabindex="-1"
+                            aria-readonly="true"
+                        >
                         <input type="hidden" id="amountHidden" name="amount" value="1000">
-                        <ion-icon name="cash-outline"></ion-icon>
                     </div>
                     <div class="space iconRelative">
                         <label for="currency"><%= t('currency') %></label>
-                        <select class="input" id="currency" name="currency" required>
-                            <option value="USD">USD</option>
-                            <option value="EUR">EUR</option>
-                            <option value="VBS">VBS</option>
+                        <select disabled class="input" id="currency" name="currency" required>
+                            <% if (lang === 'es') { %>
+                                <option value="VBS">VBS</option>
+                            <% } else { %>
+                                <option value="USD">USD</option>
+                            <% } %>
                         </select>
+                        <input type="hidden" name="currency" value="<%= lang === 'es' ? 'VBS' : 'USD' %>">
                     </div>
                 </div>
 
@@ -78,11 +89,31 @@ const servicePrices = {
     diagnostico: 400
 };
 
-document.getElementById('service').addEventListener('change', function() {
-    const price = servicePrices[this.value];
-    document.getElementById('amount').value = price;
-    document.getElementById('amountHidden').value = price;
-});
+const lang = "<%= lang %>";
+const currency = lang === 'es' ? 'VBS' : 'USD';
+
+const formatCurrency = (amount, currency) => {
+    if (lang === 'es') {
+        return new Intl.NumberFormat('es-VE', { style: 'currency', currency: currency === 'VBS' ? 'VES' : currency, minimumFractionDigits: 2 }).format(amount);
+    } else {
+        return new Intl.NumberFormat('en-US', { style: 'currency', currency: currency === 'VBS' ? 'USD' : currency, minimumFractionDigits: 2 }).format(amount);
+    }
+};
+
+const serviceSelect = document.getElementById('service');
+const amountInput = document.getElementById('amount');
+const amountHidden = document.getElementById('amountHidden');
+
+function updateAmount() {
+    const price = servicePrices[serviceSelect.value];
+    amountInput.value = formatCurrency(price, currency);
+    amountHidden.value = price;
+}
+
+serviceSelect.addEventListener('change', updateAmount);
+
+// Inicializa el monto al cargar la página
+updateAmount();
 </script>
 
 <%- include('template/footer.ejs') %>

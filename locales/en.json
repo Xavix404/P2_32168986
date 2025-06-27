@@ -91,5 +91,12 @@
   "error_register": "Registration error.",
   "error_invalid_login": "Incorrect username or password.",
   "error_payment_api": "The payment API did not respond correctly.",
-  "error_payment_process": "Error processing payment."
+  "error_payment_process": "Error processing payment.",
+  "api_Invalid card number": "Invalid card number",
+  "api_Insufficient funds": "Insufficient funds",
+  "api_Invalid CVV": "Invalid CVV",
+  "api_Invalid expiration date": "Invalid expiration date",
+  "api_payment rejected": "Payment rejected",
+  "api_payment error": "Payment error",
+  "api_insufficient funds": "Insufficient funds"
 }

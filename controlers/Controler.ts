@@ -158,6 +158,7 @@ export class contactControler {
     static async processPayment(req: Request, res: Response) {
         try {
             let { cardNumber, cardHolder, expiryYear, expiryMonth, cvv, amount, currency, service } = req.body;
+            //console.log({ cardNumber, cardHolder, expiryYear, expiryMonth, cvv, amount, currency, service });
             cardNumber = String(cardNumber).replace(/\s+/g, '');
             const reference = '011';
 
@@ -179,22 +180,26 @@ export class contactControler {
 
             // console.log('Status de respuesta:', response.status);
             const text = await response.text();
-            // console.log('Respuesta de la API:', text);
+            //console.log('Respuesta de la API:', text);
 
             let result;
             try {
                 result = JSON.parse(text);
                 ContactsModel.addPago(result.data.description, result.data.amount, result.data.date, result.success ? 'success' : 'error');
-                // console.log('Resultado del pago:', result);
             } catch (e) {
                 const t = res.locals.t || ((key: string) => key);
-                return res.render('payment', { title: "Pago", error: t('error_payment_api') });
+                const apiMsgKey = 'api_' + text.trim();
+                const translatedMsg = t(apiMsgKey) !== apiMsgKey ? t(apiMsgKey) : t('error_payment_api');
+                return res.render('payment', { title: "Pago", error: translatedMsg });
             }
 
             if (result.success) {
                 return res.render('paymentSuccess', { title: "Pago Exitoso" });
             } else {
-                return res.render('payment', { title: "Pago", error: result.message });
+                const t = res.locals.t || ((key: string) => key);
+                const apiMsgKey = 'api_' + result.message;
+                const translatedMsg = t(apiMsgKey) !== apiMsgKey ? t(apiMsgKey) : result.message;
+                return res.render('payment', { title: "Pago", error: translatedMsg });
             }
         } catch (error) {
             console.log('Error en el pago:', error);

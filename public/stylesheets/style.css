@@ -657,6 +657,37 @@ table, th, td {
     color: #111621;
 }
 
+.amount-formatted {
+    display: inline-block;
+    background: #fff;
+    color: #0984e3;
+    font-size: 1.7rem;
+    font-weight: bold;
+    padding: 0.3em 1em;
+    border-radius: 12px;
+    margin: 0.5em 0 0.5em 0.2em;
+    box-shadow: 0 2px 8px rgba(9, 132, 227, 0.07);
+    letter-spacing: 1px;
+    min-width: 120px;
+    text-align: center;
+    vertical-align: middle;
+    border: 2px solid #6CB0DD;
+    transition: background 0.2s, color 0.2s;
+}
+
+.amount-formatted:empty {
+    display: none;
+}
+
+.iconRelative ion-icon[name="cash-outline"] {
+    position: absolute;
+    left: -30px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2rem;
+    color: #0984e3;
+}
+
 /*payment succes*/
 
 .paymentSuccess {
