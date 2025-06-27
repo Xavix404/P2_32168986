@@ -22,6 +22,7 @@
   "dependencies": {
     "bcrypt": "6.0.0",
     "body-parser": "2.2.0",
+    "cookie-parser": "^1.4.7",
     "dotenv": "16.5.0",
     "ejs": "3.1.10",
     "express": "4.21.2",
@@ -39,6 +40,7 @@
     "@types/better-sqlite3": "7.6.13",
     "@types/body-parser": "1.19.6",
     "@types/console-clear": "1.1.4",
+    "@types/cookie-parser": "^1.4.9",
     "@types/express": "5.0.3",
     "@types/express-session": "1.18.1",
     "@types/node": "24.0.1",
